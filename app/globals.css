@@ -1,0 +1,31 @@
+:root { --green:#176b4d; --blue:#075fa9; --gold:#efb52e; --ink:#18322c; --mist:#f5f8f6; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); background:var(--mist); font-family:Arial, Helvetica, sans-serif; }
+a { color:inherit; text-decoration:none; }
+.shell { max-width:1120px; margin:auto; padding:0 24px; }
+.header { background:white; border-bottom:1px solid #dce6e0; position:sticky; top:0; z-index:5; }
+.header-inner { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.brand { color:var(--green); font-weight:800; letter-spacing:.08em; }
+.brand small { display:block; color:var(--blue); font-size:.62rem; letter-spacing:.04em; }
+.nav { display:flex; gap:18px; font-size:.9rem; flex-wrap:wrap; justify-content:end; }
+.hero { background:linear-gradient(120deg, rgba(11,66,50,.94), rgba(7,95,169,.80)), url('/images/hero-ecos.jpg') center/cover; color:white; padding:112px 0 100px; }
+.eyebrow { color:#ffe082; text-transform:uppercase; letter-spacing:.12em; font-size:.78rem; font-weight:bold; }
+h1 { font-size:clamp(2.3rem,6vw,4.6rem); max-width:850px; margin:.4rem 0 1rem; line-height:1.06; }
+h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
+.lead { max-width:700px; font-size:1.15rem; line-height:1.65; }
+.actions { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+.button { padding:13px 18px; border-radius:5px; background:var(--gold); color:#233126; font-weight:bold; }
+.button.ghost { border:1px solid white; background:transparent; color:white; }
+.section { padding:72px 0; }
+.section.white { background:white; }
+.grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; }
+.card { background:white; border-radius:8px; padding:24px; box-shadow:0 8px 28px #1b342111; }
+.card h3 { margin-top:0; color:var(--green); }
+.stat { font-size:2.2rem; color:var(--blue); font-weight:bold; }
+.post-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+.post { border-top:5px solid var(--gold); }
+.tag { color:var(--blue); font-size:.78rem; font-weight:bold; text-transform:uppercase; letter-spacing:.06em; }
+.footer { background:#112e27; color:#dceae4; padding:42px 0; }
+.locale { font-size:.8rem; color:var(--blue); font-weight:bold; }
+@media (max-width:760px) { .nav { display:none; } .grid { grid-template-columns:repeat(2,1fr); } .post-grid { grid-template-columns:1fr; } .hero { padding:82px 0; } }
+
