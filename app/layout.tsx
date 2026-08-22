@@ -8,7 +8,6 @@ export const metadata: Metadata = {
     template: "%s | ECOS Sahel",
   },
   description: "ECOS Mali et ECOS Burkina Faso, engagés pour un Sahel plus juste.",
-  icons: { icon: "/icon.svg" },
 };
 
 export const viewport: Viewport = {

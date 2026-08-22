@@ -9,7 +9,7 @@ a { color:inherit; text-decoration:none; }
 .brand-logo { object-fit:contain; height:44px; width:auto; }
 .brand small { display:block; color:var(--blue); font-size:.62rem; letter-spacing:.04em; font-weight:600; }
 .nav { display:flex; gap:18px; font-size:.9rem; flex-wrap:wrap; justify-content:flex-end; }
-.hero { background:linear-gradient(120deg, rgba(11,66,50,.94), rgba(7,95,169,.80)), url('/images/hero-lecture-mali.jpg') center/cover; color:white; padding:112px 0 100px; }
+.hero { background:linear-gradient(160deg, rgba(11,66,50,.55) 0%, rgba(7,46,38,.62) 100%), url('/images/hero-lecture-mali.jpg') center/cover; color:white; padding:112px 0 100px; }
 .eyebrow { color:#ffe082; text-transform:uppercase; letter-spacing:.12em; font-size:.78rem; font-weight:bold; }
 h1 { font-size:clamp(2.3rem,6vw,4.6rem); max-width:850px; margin:.4rem 0 1rem; line-height:1.06; }
 h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
