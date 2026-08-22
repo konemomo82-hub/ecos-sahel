@@ -1,13 +1,13 @@
 export const content = {
   fr: {
-    nav: ["Ã€ propos", "Programmes", "ECOS Mali", "ECOS Burkina Faso", "ActualitÃ©s", "Ressources", "Contact"],
-    heroTitle: "Ã‰duquer, inclure et construire des communautÃ©s rÃ©silientes.",
-    heroText: "ECOS agit au Mali et au Burkina Faso pour offrir aux enfants, aux jeunes et aux communautÃ©s vulnÃ©rables des opportunitÃ©s dâ€™apprentissage, dâ€™autonomie et dâ€™engagement citoyen.",
+    nav: ["À propos", "Programmes", "ECOS Mali", "ECOS Burkina Faso", "Actualités", "Ressources", "Contact"],
+    heroTitle: "Éduquer, inclure et construire des communautés résilientes.",
+    heroText: "ECOS agit au Mali et au Burkina Faso pour offrir aux enfants, aux jeunes et aux communautés vulnérables des opportunités d'apprentissage, d'autonomie et d'engagement citoyen.",
     programs: [
-      ["Ã‰ducation", "BibliothÃ¨ques sous les manguiers et accÃ¨s Ã  la lecture."],
+      ["Éducation", "Bibliothèques sous les manguiers et accès à la lecture."],
       ["Jeunesse", "Formation et insertion agropastorale des jeunes."],
-      ["Climat", "Sensibilisation, agroÃ©cologie et rÃ©silience communautaire."],
-      ["CohÃ©sion sociale", "Initiatives locales pour le vivre-ensemble."],
+      ["Climat", "Sensibilisation, agroécologie et résilience communautaire."],
+      ["Cohésion sociale", "Initiatives locales pour le vivre-ensemble."],
     ],
   },
   en: {
@@ -24,8 +24,8 @@ export const content = {
 } as const;
 
 export const initialPosts = [
-  { title: "Les bibliothÃ¨ques sous les manguiers", scope: "mali", excerpt: "Une action historique pour rapprocher les enfants de la lecture." },
-  { title: "ECOS Burkina Faso : une dynamique rÃ©gionale", scope: "burkina", excerpt: "Les activitÃ©s et les perspectives de lâ€™antenne burkinabÃ¨." },
-  { title: "Un Sahel solidaire et rÃ©silient", scope: "portal", excerpt: "Notre vision commune au Mali et au Burkina Faso." },
+  { title: "Les bibliothèques sous les manguiers", scope: "mali", excerpt: "Une action historique pour rapprocher les enfants de la lecture." },
+  { title: "ECOS Burkina Faso : une dynamique régionale", scope: "burkina", excerpt: "Les activités et les perspectives de l'antenne burkinabè." },
+  { title: "Un Sahel solidaire et résilient", scope: "portal", excerpt: "Notre vision commune au Mali et au Burkina Faso." },
 ];
 
