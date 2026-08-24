@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { supabase } from "../../../lib/supabase";
 import type { Session } from "@supabase/supabase-js";
 
@@ -31,6 +31,8 @@ const emptyDraft = {
 
 const scopeLabel: Record<Scope, string> = { portal: "ECOS Sahel (portail)", mali: "ECOS Mali", burkina: "ECOS Burkina Faso" };
 
+type MediaFile = { name: string; url: string; created_at?: string | null };
+
 export default function AdminPage() {
   if (!supabase) {
     return <div className="admin-shell"><div className="admin-card">
@@ -54,6 +56,11 @@ function AdminInner() {
   const [saveError, setSaveError] = useState("");
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [view, setView] = useState<"posts" | "media">("posts");
+  const [media, setMedia] = useState<MediaFile[]>([]);
+  const [loadingMedia, setLoadingMedia] = useState(false);
+  const contentFrRef = useRef<HTMLTextAreaElement>(null);
+  const contentEnRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     supabase!.auth.getSession().then(({ data }) => setSession(data.session));
@@ -75,6 +82,23 @@ function AdminInner() {
   }, [session]);
 
   useEffect(() => { loadPosts(); }, [loadPosts]);
+
+  const loadMedia = useCallback(() => {
+    if (!session) return;
+    setLoadingMedia(true);
+    supabase!.storage.from("site-media").list("covers", { sortBy: { column: "created_at", order: "desc" } })
+      .then(({ data }) => {
+        const files = (data ?? []).filter((f) => f.name !== ".emptyFolderPlaceholder").map((f) => ({
+          name: `covers/${f.name}`,
+          url: supabase!.storage.from("site-media").getPublicUrl(`covers/${f.name}`).data.publicUrl,
+          created_at: f.created_at,
+        }));
+        setMedia(files);
+        setLoadingMedia(false);
+      });
+  }, [session]);
+
+  useEffect(() => { if (view === "media") loadMedia(); }, [view, loadMedia]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -121,6 +145,30 @@ function AdminInner() {
     if (error) { setSaveError("Échec de l'envoi de l'image : " + error.message); return; }
     const { data } = supabase!.storage.from("site-media").getPublicUrl(path);
     setDraft((d) => ({ ...d, cover_image_path: data.publicUrl }));
+  }
+
+  async function handleInsertImage(file: File, lang: "fr" | "en") {
+    setUploading(true); setSaveError("");
+    const path = `covers/${Date.now()}-${slugify(file.name.replace(/\.[^.]+$/, ""))}.${file.name.split(".").pop()}`;
+    const { error } = await supabase!.storage.from("site-media").upload(path, file);
+    setUploading(false);
+    if (error) { setSaveError("Échec de l'envoi de l'image : " + error.message); return; }
+    const { data } = supabase!.storage.from("site-media").getPublicUrl(path);
+    const markdown = `\n\n![](${data.publicUrl})\n\n`;
+    const field = lang === "fr" ? "content_fr" : "content_en";
+    const ref = lang === "fr" ? contentFrRef.current : contentEnRef.current;
+    setDraft((d) => {
+      const current = d[field] ?? "";
+      const pos = ref?.selectionStart ?? current.length;
+      const next = current.slice(0, pos) + markdown + current.slice(pos);
+      return { ...d, [field]: next };
+    });
+  }
+
+  async function handleDeleteMedia(name: string) {
+    if (!confirm("Supprimer définitivement cette image ? Elle disparaîtra de tous les articles qui l'utilisent.")) return;
+    await supabase!.storage.from("site-media").remove([name]);
+    loadMedia();
   }
 
   async function notifyRevalidate() {
@@ -187,20 +235,35 @@ function AdminInner() {
         <button className="button ghost" onClick={handleLogout}>Se déconnecter</button>
       </div>
 
+      {!editingId && (
+        <div className="admin-tabs">
+          <button className={`admin-tab ${view === "posts" ? "active" : ""}`} onClick={() => setView("posts")}>Articles</button>
+          <button className={`admin-tab ${view === "media" ? "active" : ""}`} onClick={() => setView("media")}>Médiathèque</button>
+        </div>
+      )}
+
       {editingId ? (
         <div className="admin-card">
           <h2>{editingId === "new" ? "Nouvel article" : "Modifier l'article"}</h2>
+          <p className="admin-hint">Pour retirer une image du texte, supprimez simplement sa ligne <code>![...]</code> dans la zone de contenu.</p>
           <label>Titre (français)*<input value={draft.title_fr} onChange={(e) => setDraft({ ...draft, title_fr: e.target.value })} /></label>
           <label>Titre (anglais)<input value={draft.title_en} onChange={(e) => setDraft({ ...draft, title_en: e.target.value })} /></label>
           <label>Image de couverture
             {draft.cover_image_path && <img src={draft.cover_image_path} alt="" className="admin-cover-preview" />}
             <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCoverUpload(f); }} disabled={uploading} />
+            {draft.cover_image_path && <button type="button" className="button ghost admin-danger admin-inline-btn" onClick={() => setDraft((d) => ({ ...d, cover_image_path: "" }))}>Retirer l&apos;image</button>}
             {uploading && <span>Envoi en cours…</span>}
           </label>
           <label>Extrait (français)<textarea rows={2} value={draft.excerpt_fr} onChange={(e) => setDraft({ ...draft, excerpt_fr: e.target.value })} /></label>
           <label>Extrait (anglais)<textarea rows={2} value={draft.excerpt_en} onChange={(e) => setDraft({ ...draft, excerpt_en: e.target.value })} /></label>
-          <label>Contenu (français)*<textarea rows={8} value={draft.content_fr} onChange={(e) => setDraft({ ...draft, content_fr: e.target.value })} /></label>
-          <label>Contenu (anglais)<textarea rows={8} value={draft.content_en} onChange={(e) => setDraft({ ...draft, content_en: e.target.value })} /></label>
+          <label>Contenu (français)*
+            <textarea rows={10} ref={contentFrRef} value={draft.content_fr} onChange={(e) => setDraft({ ...draft, content_fr: e.target.value })} />
+            <span className="admin-insert-image">📷 Insérer une image ici<input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleInsertImage(f, "fr"); e.target.value = ""; }} disabled={uploading} /></span>
+          </label>
+          <label>Contenu (anglais)
+            <textarea rows={10} ref={contentEnRef} value={draft.content_en} onChange={(e) => setDraft({ ...draft, content_en: e.target.value })} />
+            <span className="admin-insert-image">📷 Insérer une image ici<input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleInsertImage(f, "en"); e.target.value = ""; }} disabled={uploading} /></span>
+          </label>
           <fieldset className="admin-scopes">
             <legend>Périmètre de publication</legend>
             {allowedScopes.map((scope) => (
@@ -216,7 +279,7 @@ function AdminInner() {
             <button className="button" onClick={() => handleSave(true)} disabled={saving}>Publier</button>
           </div>
         </div>
-      ) : (
+      ) : view === "posts" ? (
         <>
           <div className="admin-actions"><button className="button" onClick={() => startEdit()}>+ Nouvel article</button></div>
           {loadingPosts ? <p>Chargement des articles…</p> : (
@@ -233,6 +296,21 @@ function AdminInner() {
                     <button className="button ghost" onClick={() => startEdit(post)}>Modifier</button>
                     <button className="button ghost admin-danger" onClick={() => handleDelete(post.id)}>Supprimer</button>
                   </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <p className="admin-hint">Images envoyées via les articles. Supprimer une image ici la retire aussi de tout article qui l&apos;utilise encore.</p>
+          {loadingMedia ? <p>Chargement…</p> : (
+            <div className="admin-media-grid">
+              {media.length === 0 && <p>Aucune image envoyée pour le moment.</p>}
+              {media.map((m) => (
+                <div className="admin-media-item" key={m.name}>
+                  <img src={m.url} alt="" />
+                  <button className="button ghost admin-danger" onClick={() => handleDeleteMedia(m.name)}>Supprimer</button>
                 </div>
               ))}
             </div>
