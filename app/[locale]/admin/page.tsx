@@ -19,12 +19,14 @@ type Post = {
   scopes: Scope[];
   status: "draft" | "published";
   featured: boolean;
+  cover_image_path: string | null;
   created_at: string;
 };
 
 const emptyDraft = {
   title_fr: "", title_en: "", excerpt_fr: "", excerpt_en: "",
   content_fr: "", content_en: "", scopes: ["portal"] as Scope[], status: "draft" as const,
+  cover_image_path: "" as string,
 };
 
 const scopeLabel: Record<Scope, string> = { portal: "ECOS Sahel (portail)", mali: "ECOS Mali", burkina: "ECOS Burkina Faso" };
@@ -51,6 +53,7 @@ function AdminInner() {
   const [draft, setDraft] = useState<typeof emptyDraft>(emptyDraft);
   const [saveError, setSaveError] = useState("");
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     supabase!.auth.getSession().then(({ data }) => setSession(data.session));
@@ -90,6 +93,7 @@ function AdminInner() {
         excerpt_fr: post.excerpt_fr ?? "", excerpt_en: post.excerpt_en ?? "",
         content_fr: post.content_fr, content_en: post.content_en ?? "",
         scopes: post.scopes, status: post.status as "draft",
+        cover_image_path: post.cover_image_path ?? "",
       });
     } else {
       setEditingId("new");
@@ -109,6 +113,20 @@ function AdminInner() {
     return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   }
 
+  async function handleCoverUpload(file: File) {
+    setUploading(true); setSaveError("");
+    const path = `covers/${Date.now()}-${slugify(file.name.replace(/\.[^.]+$/, ""))}.${file.name.split(".").pop()}`;
+    const { error } = await supabase!.storage.from("site-media").upload(path, file);
+    setUploading(false);
+    if (error) { setSaveError("Échec de l'envoi de l'image : " + error.message); return; }
+    const { data } = supabase!.storage.from("site-media").getPublicUrl(path);
+    setDraft((d) => ({ ...d, cover_image_path: data.publicUrl }));
+  }
+
+  async function notifyRevalidate() {
+    try { await fetch("/api/revalidate", { method: "POST" }); } catch { /* non bloquant */ }
+  }
+
   async function handleSave(publish: boolean) {
     if (!draft.title_fr.trim() || !draft.content_fr.trim()) { setSaveError("Le titre et le contenu (français) sont obligatoires."); return; }
     if (draft.scopes.length === 0) { setSaveError("Choisissez au moins un périmètre de publication."); return; }
@@ -119,6 +137,7 @@ function AdminInner() {
       excerpt_fr: draft.excerpt_fr || null, excerpt_en: draft.excerpt_en || null,
       content_fr: draft.content_fr, content_en: draft.content_en || null,
       scopes: draft.scopes, status,
+      cover_image_path: draft.cover_image_path || null,
       published_at: publish ? new Date().toISOString() : null,
     };
     let error;
@@ -133,12 +152,14 @@ function AdminInner() {
     if (error) { setSaveError(error.message); return; }
     setEditingId(null);
     loadPosts();
+    if (publish) notifyRevalidate();
   }
 
   async function handleDelete(id: string) {
     if (!confirm("Supprimer définitivement cet article ?")) return;
     await supabase!.from("posts").delete().eq("id", id);
     loadPosts();
+    notifyRevalidate();
   }
 
   if (session === undefined) return <div className="admin-shell"><p>Chargement…</p></div>;
@@ -171,6 +192,11 @@ function AdminInner() {
           <h2>{editingId === "new" ? "Nouvel article" : "Modifier l'article"}</h2>
           <label>Titre (français)*<input value={draft.title_fr} onChange={(e) => setDraft({ ...draft, title_fr: e.target.value })} /></label>
           <label>Titre (anglais)<input value={draft.title_en} onChange={(e) => setDraft({ ...draft, title_en: e.target.value })} /></label>
+          <label>Image de couverture
+            {draft.cover_image_path && <img src={draft.cover_image_path} alt="" className="admin-cover-preview" />}
+            <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCoverUpload(f); }} disabled={uploading} />
+            {uploading && <span>Envoi en cours…</span>}
+          </label>
           <label>Extrait (français)<textarea rows={2} value={draft.excerpt_fr} onChange={(e) => setDraft({ ...draft, excerpt_fr: e.target.value })} /></label>
           <label>Extrait (anglais)<textarea rows={2} value={draft.excerpt_en} onChange={(e) => setDraft({ ...draft, excerpt_en: e.target.value })} /></label>
           <label>Contenu (français)*<textarea rows={8} value={draft.content_fr} onChange={(e) => setDraft({ ...draft, content_fr: e.target.value })} /></label>

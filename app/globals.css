@@ -24,7 +24,8 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .card h3 { margin-top:0; color:var(--green); }
 .stat { font-size:2.2rem; color:var(--blue); font-weight:bold; }
 .post-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
-.post { border-top:5px solid var(--gold); }
+.post { border-top:5px solid var(--gold); overflow:hidden; }
+.post-cover { width:calc(100% + 48px); margin:-24px -24px 16px; height:160px; object-fit:cover; display:block; }
 .tag { color:var(--blue); font-size:.78rem; font-weight:bold; text-transform:uppercase; letter-spacing:.06em; }
 .gallery { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
 .gallery-item { margin:0; background:white; border-radius:8px; overflow:hidden; box-shadow:0 8px 28px #1b342111; }
@@ -58,4 +59,5 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .admin-scopes-tags { margin-top:6px; display:flex; gap:6px; flex-wrap:wrap; }
 .admin-tag { background:var(--mist); color:var(--blue); font-size:.72rem; padding:2px 8px; border-radius:4px; }
 .admin-danger { color:#b3261e; border-color:#b3261e; }
+.admin-cover-preview { max-width:220px; border-radius:6px; display:block; margin-bottom:8px; }
 
