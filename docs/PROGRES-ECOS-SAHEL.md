@@ -39,29 +39,25 @@ Un seul portail (`ecos-sahel.org`) présentant les deux antennes, avec un systè
 14. ✅ **Section « À propos »** sur l'accueil (intro, histoire en 3 paragraphes, 4 valeurs) — *texte provisoire à relire*
 15. ✅ **Section « Ressources »** sur l'accueil (4 documents ; ceux sans fichier s'affichent « Bientôt disponible » plutôt qu'en lien mort)
 16. ✅ Pages d'antenne enrichies : bloc « Nos actions sur le terrain » (3 missions) + galerie photo filtrée par antenne
+17. ✅ **Corrigé l'« Application error » après déploiement** : le cache ISR de Next.js survivait au build et servait l'ancien HTML, qui pointait vers des fichiers JS/CSS supprimés (404 → échec d'hydratation). `.next` est désormais effacé avant chaque build — voir [`DEPLOIEMENT-CACHE.md`](DEPLOIEMENT-CACHE.md)
 
 → Les 8 liens du menu mènent désormais tous quelque part. Plus aucune ancre morte.
 
 ## À faire — priorités pour la suite
 
-### 1. Déployer (immédiat)
-- Fusionner `feat/ecos-sahel-v1` dans `main` et pousser
-- hPanel → app Node.js → Git → **Deploy** (ou attendre le déploiement automatique si le webhook est actif)
-- Vérifier que les variables `NEXT_PUBLIC_SUPABASE_URL` et `NEXT_PUBLIC_SUPABASE_ANON_KEY` sont bien définies dans hPanel — sans elles, le site fonctionne mais les articles Supabase n'apparaissent pas et `/admin` affiche « Configuration requise »
-
-### 2. Relire le contenu provisoire
+### 1. Relire le contenu provisoire
 Écrit par défaut, à corriger par ECOS :
 - `about` dans `data/site.ts` — intro, histoire, valeurs
 - `antennas.mali.missions_fr` / `antennas.burkina.missions_fr` — les 3 missions de chaque antenne
 
-### 3. Fichiers à fournir
+### 2. Fichiers à fournir
 Voir [`MEDIAS-A-FOURNIR.md`](MEDIAS-A-FOURNIR.md) : les 4 PDF de la rubrique Ressources, et le logo Burkina en meilleure résolution (l'actuel fait 294 × 145 px).
 
-### 4. Domaine définitif
+### 3. Domaine définitif
 - Brancher `ecos-sahel.org` dans hPanel → app Node.js → Domaines
 - Activer le SSL une fois le domaine reconnu
 
-### 5. Petits plus (non urgent)
+### 4. Petits plus (non urgent)
 - Formulaire de contact fonctionnel (la section « Contact » est aujourd'hui une présentation des deux antennes, sans formulaire)
 - Analytics (Google Analytics ou Plausible)
 - Image Open Graph dédiée pour le partage sur réseaux sociaux
