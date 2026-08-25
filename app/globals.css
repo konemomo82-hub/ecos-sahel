@@ -36,7 +36,24 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .anchor-card img { object-fit:contain; margin-bottom:14px; }
 .footer { background:#112e27; color:#dceae4; padding:42px 0; }
 .locale { font-size:.8rem; color:var(--blue); font-weight:bold; }
-@media (max-width:760px) { .nav { display:none; } .grid { grid-template-columns:repeat(2,1fr); } .post-grid { grid-template-columns:1fr; } .gallery { grid-template-columns:1fr; } .hero { padding:82px 0; } }
+/* À propos */
+.about-story { max-width:760px; }
+.about-story p { line-height:1.75; font-size:1.02rem; margin:0 0 1.1em; }
+.section-lead { font-size:1.12rem; line-height:1.7; max-width:760px; color:var(--ink); }
+.about-values { margin-top:38px; }
+
+/* Ressources */
+.resource-list { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+.resource-item { display:flex; flex-direction:column; }
+.resource-item h3 { margin:0 0 8px; }
+.resource-item p { margin:0; color:#4a5f57; font-size:.95rem; line-height:1.6; }
+.resource-link { margin-top:auto; padding-top:14px; color:var(--blue); font-weight:bold; font-size:.9rem; }
+.resource-soon { margin-top:auto; padding-top:14px; color:#7b8a84; font-size:.88rem; font-style:italic; }
+
+/* Antennes — missions */
+.antenna-missions { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+
+@media (max-width:760px) { .nav { display:none; } .grid { grid-template-columns:repeat(2,1fr); } .post-grid { grid-template-columns:1fr; } .gallery { grid-template-columns:1fr; } .hero { padding:82px 0; } .resource-list { grid-template-columns:1fr; } .antenna-missions { grid-template-columns:1fr; } }
 
 /* Admin */
 .admin-shell { min-height:100vh; background:var(--mist); padding:48px 24px; display:flex; justify-content:center; }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { content, initialPosts, gallery, antennas } from "../../data/site";
+import { content, initialPosts, gallery, antennas, about, resources } from "../../data/site";
 import { supabase } from "../../lib/supabase";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
@@ -56,6 +56,12 @@ export default async function Home({ params }: { params: Promise<{ locale: "fr" 
     <SiteHeader locale={locale} />
     <main>
       <section className="hero"><div className="shell"><div className="eyebrow">ECOS Mali · ECOS Burkina Faso</div><h1>{copy.heroTitle}</h1><p className="lead">{copy.heroText}</p><div className="actions"><a className="button" href="#programmes">{locale === "fr" ? "Découvrir nos actions" : "Discover our work"}</a><a className="button ghost" href="#contact">{locale === "fr" ? "Devenir partenaire" : "Become a partner"}</a></div></div></section>
+      <section id="a-propos" className="section"><div className="shell">
+        <h2>{locale === "fr" ? "À propos d'ECOS Sahel" : "About ECOS Sahel"}</h2>
+        <p className="section-lead">{locale === "en" ? about.intro_en : about.intro_fr}</p>
+        <div className="about-story">{(locale === "en" ? about.story_en : about.story_fr).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+        <div className="grid about-values">{(locale === "en" ? about.values_en : about.values_fr).map(([title, text]) => <article className="card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+      </div></section>
       <section className="section white"><div className="shell"><h2>{locale === "fr" ? "Notre impact en 2024" : "Our impact in 2024"}</h2><div className="grid">{[["50", locale === "fr" ? "enfants accompagnés" : "children supported"],["52", locale === "fr" ? "jeunes formés" : "young people trained"],["48", locale === "fr" ? "bibliothèques de rue" : "street libraries"],["10", locale === "fr" ? "formateurs climat" : "climate trainers"]].map(([n,label])=><div className="card" key={label}><div className="stat">{n}</div><div>{label}</div></div>)}</div></div></section>
       <section id="programmes" className="section"><div className="shell"><h2>{locale === "fr" ? "Nos programmes" : "Our programmes"}</h2><div className="grid">{copy.programs.map(([title, text])=><article className="card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
       <section id="actualites" className="section white"><div className="shell"><h2>{locale === "fr" ? "Actualités" : "News"}</h2><div className="post-grid">{posts.map((post, i)=>{
@@ -67,7 +73,20 @@ export default async function Home({ params }: { params: Promise<{ locale: "fr" 
         return <Link href={href} className="card post" key={post.title + i}>{inner}</Link>;
       })}</div></div></section>
       <section id="galerie" className="section"><div className="shell"><h2>{locale === "fr" ? "Nos actions en images" : "Our work in pictures"}</h2><div className="gallery">{gallery.map((photo) => <figure className="gallery-item" key={photo.src}><Image src={photo.src} alt={locale === "fr" ? photo.alt_fr : photo.alt_en} width={480} height={360} /><figcaption>{locale === "fr" ? photo.alt_fr : photo.alt_en}</figcaption></figure>)}</div></div></section>
-      <section id="contact" className="section white"><div className="shell"><h2>{locale === "fr" ? "Deux ancrages, une vision" : "Two anchors, one vision"}</h2><div className="grid">
+      <section id="ressources" className="section white"><div className="shell">
+        <h2>{locale === "fr" ? "Ressources" : "Resources"}</h2>
+        <p className="section-lead">{locale === "fr" ? "Les documents de référence des deux associations. Ceux qui ne sont pas encore en ligne le seront prochainement." : "Reference documents for both associations. Those not yet online will be published shortly."}</p>
+        <div className="resource-list" style={{ marginTop: 32 }}>{resources.map((resource) => {
+          const title = (locale === "en" && resource.title_en) || resource.title_fr;
+          const inner = <><h3>{title}</h3><p>{(locale === "en" && resource.desc_en) || resource.desc_fr}</p>{resource.file
+            ? <span className="resource-link">{locale === "fr" ? "Télécharger →" : "Download →"}</span>
+            : <span className="resource-soon">{locale === "fr" ? "Bientôt disponible" : "Coming soon"}</span>}</>;
+          return resource.file
+            ? <a className="card resource-item" href={resource.file} target="_blank" rel="noopener noreferrer" key={title}>{inner}</a>
+            : <div className="card resource-item" key={title}>{inner}</div>;
+        })}</div>
+      </div></section>
+      <section id="contact" className="section"><div className="shell"><h2>{locale === "fr" ? "Deux ancrages, une vision" : "Two anchors, one vision"}</h2><div className="grid">
         <Link href={`/${locale}/ecos-mali`} className="card anchor-card"><Image src={antennas.mali.logo} alt="ECOS Mali" width={90} height={63} /><h3>ECOS Mali</h3><p>{antennas.mali.location_fr}<br />{antennas.mali.lead_fr}</p></Link>
         <Link href={`/${locale}/ecos-burkina`} className="card anchor-card"><Image src={antennas.burkina.logo} alt="ECOS Burkina Faso" width={90} height={44} /><h3>ECOS Burkina Faso</h3><p>{antennas.burkina.location_fr}<br />{antennas.burkina.lead_fr}</p></Link>
       </div></div></section>
