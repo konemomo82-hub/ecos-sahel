@@ -3,8 +3,8 @@ export const content = {
     nav: [
       { label: "À propos", id: "a-propos" },
       { label: "Programmes", id: "programmes" },
-      { label: "ECOS Mali", id: "ecos-mali" },
-      { label: "ECOS Burkina Faso", id: "ecos-burkina" },
+      { label: "ECOS Mali", id: "ecos-mali", path: "ecos-mali" },
+      { label: "ECOS Burkina Faso", id: "ecos-burkina", path: "ecos-burkina" },
       { label: "Actualités", id: "actualites" },
       { label: "Galerie", id: "galerie" },
       { label: "Ressources", id: "ressources" },
@@ -23,8 +23,8 @@ export const content = {
     nav: [
       { label: "About", id: "a-propos" },
       { label: "Programmes", id: "programmes" },
-      { label: "ECOS Mali", id: "ecos-mali" },
-      { label: "ECOS Burkina Faso", id: "ecos-burkina" },
+      { label: "ECOS Mali", id: "ecos-mali", path: "ecos-mali" },
+      { label: "ECOS Burkina Faso", id: "ecos-burkina", path: "ecos-burkina" },
       { label: "News", id: "actualites" },
       { label: "Gallery", id: "galerie" },
       { label: "Resources", id: "ressources" },
@@ -52,6 +52,25 @@ export const gallery = [
   { src: "/images/burkina-kaya-nooma-1.jpg", alt_fr: "Distribution solidaire, événement Kaya Nooma", alt_en: "Solidarity distribution, Kaya Nooma event" },
   { src: "/images/burkina-kaya-nooma-2.jpg", alt_fr: "Équipe ECOS Burkina sur le terrain, Kaya Nooma", alt_en: "ECOS Burkina team on site, Kaya Nooma" },
 ];
+
+export const antennas = {
+  mali: {
+    name: "ECOS Mali",
+    logo: "/logos/logo-ecos-mali.png",
+    location_fr: "Bamako, Mali", location_en: "Bamako, Mali",
+    lead_fr: "Président : Esaïe Kamaté", lead_en: "President: Esaïe Kamaté",
+    intro_fr: "ECOS Mali agit à Bamako et dans ses environs pour l'éducation, l'insertion des jeunes et la résilience climatique des communautés.",
+    intro_en: "ECOS Mali works in and around Bamako on education, youth integration and community climate resilience.",
+  },
+  burkina: {
+    name: "ECOS Burkina Faso",
+    logo: "/logos/logo-ecos-burkina.png",
+    location_fr: "Ouagadougou, Burkina Faso", location_en: "Ouagadougou, Burkina Faso",
+    lead_fr: "Président : Ibrahima KONE", lead_en: "President: Ibrahima KONE",
+    intro_fr: "ECOS Burkina Faso mobilise les jeunes autour de l'agroécologie, de la solidarité communautaire et de la cohésion sociale.",
+    intro_en: "ECOS Burkina Faso mobilises young people around agroecology, community solidarity and social cohesion.",
+  },
+} as const;
 
 export const initialPosts = [
   { title: "Les bibliothèques sous les manguiers", scope: "mali", excerpt: "Une action historique pour rapprocher les enfants de la lecture." },

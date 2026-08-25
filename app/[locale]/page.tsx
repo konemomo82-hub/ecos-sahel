@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { content, initialPosts, gallery } from "../../data/site";
+import { content, initialPosts, gallery, antennas } from "../../data/site";
 import { supabase } from "../../lib/supabase";
+import SiteHeader from "../components/SiteHeader";
+import SiteFooter from "../components/SiteFooter";
 
 type Post = { id: string; slug: string; title_fr: string; title_en: string | null; excerpt_fr: string | null; excerpt_en: string | null; scopes: ("portal" | "mali" | "burkina")[]; cover_image_path: string | null };
 
@@ -51,27 +53,26 @@ export default async function Home({ params }: { params: Promise<{ locale: "fr" 
     }
   }
   return <>
-    <header className="header"><div className="shell header-inner">
-      <Link href={`/${locale}`} className="brand">
-        <Image src="/logos/logo-ecos-sahel.png" alt="ECOS Sahel" width={44} height={31} className="brand-logo" priority />
-        <span>ECOS SAHEL<small>Éducation · Cohésion sociale · Résilience</small></span>
-      </Link>
-      <nav className="nav">{copy.nav.map((item) => <a href={`#${item.id}`} key={item.id}>{item.label}</a>)}</nav>
-      <div className="locale"><Link href="/fr">FR</Link> · <Link href="/en">EN</Link></div>
-    </div></header>
+    <SiteHeader locale={locale} />
     <main>
       <section className="hero"><div className="shell"><div className="eyebrow">ECOS Mali · ECOS Burkina Faso</div><h1>{copy.heroTitle}</h1><p className="lead">{copy.heroText}</p><div className="actions"><a className="button" href="#programmes">{locale === "fr" ? "Découvrir nos actions" : "Discover our work"}</a><a className="button ghost" href="#contact">{locale === "fr" ? "Devenir partenaire" : "Become a partner"}</a></div></div></section>
       <section className="section white"><div className="shell"><h2>{locale === "fr" ? "Notre impact en 2024" : "Our impact in 2024"}</h2><div className="grid">{[["50", locale === "fr" ? "enfants accompagnés" : "children supported"],["52", locale === "fr" ? "jeunes formés" : "young people trained"],["48", locale === "fr" ? "bibliothèques de rue" : "street libraries"],["10", locale === "fr" ? "formateurs climat" : "climate trainers"]].map(([n,label])=><div className="card" key={label}><div className="stat">{n}</div><div>{label}</div></div>)}</div></div></section>
       <section id="programmes" className="section"><div className="shell"><h2>{locale === "fr" ? "Nos programmes" : "Our programmes"}</h2><div className="grid">{copy.programs.map(([title, text])=><article className="card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
       <section id="actualites" className="section white"><div className="shell"><h2>{locale === "fr" ? "Actualités" : "News"}</h2><div className="post-grid">{posts.map((post, i)=>{
         const inner = <>{post.cover && <img src={post.cover} alt="" className="post-cover" />}<div className="tag">{post.scope === "portal" ? "ECOS Sahel" : post.scope === "mali" ? "ECOS Mali" : "ECOS Burkina Faso"}</div><h3>{post.title}</h3><p>{post.excerpt}</p>{post.slug && <span className="post-readmore">{locale === "fr" ? "Lire l'article →" : "Read article →"}</span>}</>;
-        return post.slug
-          ? <Link href={`/${locale}/actualites/${post.slug}`} className="card post" key={post.title + i}>{inner}</Link>
-          : <article className="card post" key={post.title + i}>{inner}</article>;
+        if (!post.slug) return <article className="card post" key={post.title + i}>{inner}</article>;
+        const href = post.scope === "mali" ? `/${locale}/ecos-mali#${post.slug}`
+          : post.scope === "burkina" ? `/${locale}/ecos-burkina#${post.slug}`
+          : `/${locale}/actualites/${post.slug}`;
+        return <Link href={href} className="card post" key={post.title + i}>{inner}</Link>;
       })}</div></div></section>
       <section id="galerie" className="section"><div className="shell"><h2>{locale === "fr" ? "Nos actions en images" : "Our work in pictures"}</h2><div className="gallery">{gallery.map((photo) => <figure className="gallery-item" key={photo.src}><Image src={photo.src} alt={locale === "fr" ? photo.alt_fr : photo.alt_en} width={480} height={360} /><figcaption>{locale === "fr" ? photo.alt_fr : photo.alt_en}</figcaption></figure>)}</div></div></section>
-      <section id="contact" className="section white"><div className="shell"><h2>{locale === "fr" ? "Deux ancrages, une vision" : "Two anchors, one vision"}</h2><div className="grid"><article className="card anchor-card"><Image src="/logos/logo-ecos-mali.png" alt="ECOS Mali" width={90} height={63} /><h3>ECOS Mali</h3><p>Bamako, Mali<br />Président : Esaïe Kamaté</p></article><article className="card anchor-card"><Image src="/logos/logo-ecos-burkina.png" alt="ECOS Burkina Faso" width={90} height={44} /><h3>ECOS Burkina Faso</h3><p>Ouagadougou, Burkina Faso<br />Président : Ibrahima KONE</p></article></div></div></section>
-    </main><footer className="footer"><div className="shell">© {new Date().getFullYear()} ECOS Sahel · ecos-sahel.org · <Link href={`/${locale}/admin`} style={{opacity:.6}}>{locale === "fr" ? "Espace admin" : "Admin"}</Link></div></footer>
+      <section id="contact" className="section white"><div className="shell"><h2>{locale === "fr" ? "Deux ancrages, une vision" : "Two anchors, one vision"}</h2><div className="grid">
+        <Link href={`/${locale}/ecos-mali`} className="card anchor-card"><Image src={antennas.mali.logo} alt="ECOS Mali" width={90} height={63} /><h3>ECOS Mali</h3><p>{antennas.mali.location_fr}<br />{antennas.mali.lead_fr}</p></Link>
+        <Link href={`/${locale}/ecos-burkina`} className="card anchor-card"><Image src={antennas.burkina.logo} alt="ECOS Burkina Faso" width={90} height={44} /><h3>ECOS Burkina Faso</h3><p>{antennas.burkina.location_fr}<br />{antennas.burkina.lead_fr}</p></Link>
+      </div></div></section>
+    </main>
+    <SiteFooter locale={locale} />
   </>;
 }
 

@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
-import { content } from "../../../../data/site";
+import { antennas } from "../../../../data/site";
 import { supabase } from "../../../../lib/supabase";
+import SiteHeader from "../../../components/SiteHeader";
+import SiteFooter from "../../../components/SiteFooter";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +15,21 @@ async function getPost(slug: string) {
   if (!supabase) return null;
   const { data } = await supabase.from("posts").select("*").eq("slug", slug).eq("status", "published").single();
   return data;
+}
+
+async function getRelated(slug: string, scopes: string[]) {
+  if (!supabase) return null;
+  const antennaScope = scopes.find((s) => s === "mali" || s === "burkina");
+  if (!antennaScope) return null;
+  const { data } = await supabase
+    .from("posts")
+    .select("id, slug, title_fr, title_en")
+    .eq("status", "published")
+    .contains("scopes", [antennaScope])
+    .neq("slug", slug)
+    .order("published_at", { ascending: false })
+    .limit(4);
+  return { antennaScope: antennaScope as "mali" | "burkina", items: data ?? [] };
 }
 
 export async function generateMetadata(
@@ -31,23 +47,16 @@ export default async function ArticlePage(
   { params }: { params: Promise<{ locale: "fr" | "en"; slug: string }> }
 ) {
   const { locale, slug } = await params;
-  const copy = content[locale] ?? content.fr;
   const post = await getPost(slug);
   if (!post) notFound();
 
   const title = (locale === "en" && post.title_en) || post.title_fr;
   const body = (locale === "en" && post.content_en) || post.content_fr;
   const scope = post.scopes.includes("portal") ? "portal" : post.scopes[0];
+  const related = await getRelated(slug, post.scopes);
 
   return <>
-    <header className="header"><div className="shell header-inner">
-      <Link href={`/${locale}`} className="brand">
-        <Image src="/logos/logo-ecos-sahel.png" alt="ECOS Sahel" width={44} height={31} className="brand-logo" priority />
-        <span>ECOS SAHEL<small>Éducation · Cohésion sociale · Résilience</small></span>
-      </Link>
-      <nav className="nav">{copy.nav.map((item) => <a href={`/${locale}#${item.id}`} key={item.id}>{item.label}</a>)}</nav>
-      <div className="locale"><Link href="/fr">FR</Link> · <Link href="/en">EN</Link></div>
-    </div></header>
+    <SiteHeader locale={locale} />
     <main>
       <article className="section white"><div className="shell article-shell">
         <Link href={`/${locale}#actualites`} className="article-back">{locale === "fr" ? "← Retour aux actualités" : "← Back to news"}</Link>
@@ -56,7 +65,20 @@ export default async function ArticlePage(
         {post.cover_image_path && <img src={post.cover_image_path} alt="" className="article-cover" />}
         <div className="article-body"><ReactMarkdown>{body}</ReactMarkdown></div>
       </div></article>
+      {related && related.items.length > 0 && (
+        <section className="section"><div className="shell article-shell">
+          <h2>{locale === "fr" ? `Autres articles ${antennas[related.antennaScope].name}` : `More from ${antennas[related.antennaScope].name}`}</h2>
+          <ul className="related-list">
+            {related.items.map((item) => (
+              <li key={item.id}><Link href={`/${locale}/actualites/${item.slug}`}>{(locale === "en" && item.title_en) || item.title_fr}</Link></li>
+            ))}
+          </ul>
+          <Link href={`/${locale}/${related.antennaScope === "mali" ? "ecos-mali" : "ecos-burkina"}`} className="article-back">
+            {locale === "fr" ? `Voir tous les articles ${antennas[related.antennaScope].name} →` : `See all ${antennas[related.antennaScope].name} articles →`}
+          </Link>
+        </div></section>
+      )}
     </main>
-    <footer className="footer"><div className="shell">© {new Date().getFullYear()} ECOS Sahel · ecos-sahel.org</div></footer>
+    <SiteFooter locale={locale} />
   </>;
 }
