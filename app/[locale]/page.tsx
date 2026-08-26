@@ -9,7 +9,7 @@ import SiteFooter from "../components/SiteFooter";
 type Post = { id: string; slug: string; title_fr: string; title_en: string | null; excerpt_fr: string | null; excerpt_en: string | null; scopes: ("portal" | "mali" | "burkina")[]; cover_image_path: string | null };
 
 export function generateStaticParams() { return [{ locale: "fr" }, { locale: "en" }]; }
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: "fr" | "en" }> }
