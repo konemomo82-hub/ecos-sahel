@@ -33,6 +33,8 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .card { background:white; border-radius:8px; padding:24px; box-shadow:0 8px 28px #1b342111; }
 .card h3 { margin-top:0; color:var(--green); }
 .stat { font-size:2.2rem; color:var(--blue); font-weight:bold; }
+.impact-source { font-size:.8rem; color:#5a6b64; margin-top:18px; }
+.about-finance { margin-top:32px; padding:18px 22px; background:var(--mist); border-left:4px solid var(--gold); border-radius:4px; font-size:.95rem; }
 .post-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
 .post { border-top:5px solid var(--gold); overflow:hidden; display:block; }
 .post-cover { width:calc(100% + 48px); margin:-24px -24px 16px; height:160px; object-fit:cover; display:block; }

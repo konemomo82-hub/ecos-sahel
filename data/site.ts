@@ -48,27 +48,33 @@ export const about = {
   intro_en:
     "ECOS Sahel is the shared portal of two sister associations, ECOS Mali and ECOS Burkina Faso. Born from the same conviction — that education and social cohesion are the first levers of resilience in the Sahel — they share one method: start from the needs communities express, train local facilitators, and build every action to last.",
   story_fr: [
-    "Le travail d'ECOS commence au Mali, autour d'une idée simple : amener les livres là où sont les enfants. Les « bibliothèques sous les manguiers » installent la lecture dans l'espace public du quartier, sans barrière d'inscription ni de frais.",
-    "L'expérience s'étend ensuite au Burkina Faso, avec une entrée différente : la jeunesse et l'agroécologie. Pépinières, serres maraîchères et campagnes de plantation y deviennent des supports de formation autant que des projets environnementaux.",
+    "Tout commence en 2002 à Heremankono (quartier de Baco Djicoroni, Bamako), avec les « bibliothèques sous les manguiers » : des bénévoles installent la lecture et le soutien scolaire à l'ombre des arbres, sans inscription ni frais. L'initiative associative se structure à partir de 2004 autour des enfants et des jeunes de Baco Djicoroni, Kalabancoro et Sanankoroba.",
+    "ECOS Mali obtient sa reconnaissance officielle le 12 juillet 2021 (agrément N°0413/G-DB, ministère malien de l'Administration territoriale et de la Décentralisation). L'association étend alors son action à la formation agropastorale des jeunes en situation de précarité et aux formations sur le changement climatique.",
+    "L'expérience essaime ensuite au Burkina Faso : ECOS Burkina Faso, fondée à Ouagadougou et reconnue en 2024, s'appuie sur le savoir-faire malien en agropastoral tout en développant sa propre dynamique de solidarité communautaire.",
     "Les deux antennes restent autonomes — chacune avec son bureau, ses partenaires et ses financements — mais mutualisent leurs outils, leurs contenus pédagogiques et leur communication à travers ce portail.",
   ],
   story_en: [
-    "ECOS's work began in Mali around a simple idea: bring books to where the children already are. The \"libraries under the mango trees\" put reading into the public space of the neighbourhood, with no registration and no fees.",
-    "The approach then extended to Burkina Faso through a different entry point: youth and agroecology. Nurseries, market-garden greenhouses and planting campaigns became training grounds as much as environmental projects.",
+    "It began in 2002 in Heremankono (Baco Djicoroni, Bamako), with the \"libraries under the mango trees\": volunteers set up reading support in the shade of the trees, with no registration and no fees. The association took shape from 2004 around the children and young people of Baco Djicoroni, Kalabancoro and Sanankoroba.",
+    "ECOS Mali received official recognition on 12 July 2021 (registration N°0413/G-DB, Malian Ministry of Territorial Administration and Decentralisation). The association then expanded into agropastoral training for young people in precarious situations and climate-change training.",
+    "The approach then spread to Burkina Faso: ECOS Burkina Faso, founded in Ouagadougou and formally recognised in 2024, draws on ECOS Mali's agropastoral know-how while building its own community-solidarity dynamic.",
     "The two branches remain autonomous — each with its own board, partners and funding — but share their tools, teaching materials and communications through this portal.",
   ],
   values_fr: [
     ["Proximité", "Les projets sont conçus et pilotés par des équipes qui vivent dans les communautés concernées."],
     ["Gratuité d'accès", "Les activités éducatives sont ouvertes à tous les enfants, sans condition d'inscription ni de ressources."],
-    ["Transmission", "Chaque action forme des relais locaux capables de la poursuivre sans nous."],
-    ["Transparence", "Les rapports d'activité et les comptes sont publiés dans la rubrique Ressources."],
+    ["Transmission", "Chaque action forme des relais locaux capables de la poursuivre sans nous — 10 formateurs climat déjà certifiés en 2024."],
+    ["Transparence", "Rapports moral et financier publiés chaque année dans la rubrique Ressources."],
   ],
   values_en: [
     ["Proximity", "Projects are designed and run by teams who live in the communities they serve."],
     ["Free access", "Educational activities are open to every child, with no registration or income requirement."],
-    ["Handover", "Every action trains local facilitators able to carry it on without us."],
-    ["Transparency", "Activity reports and accounts are published in the Resources section."],
+    ["Handover", "Every action trains local facilitators able to carry it on without us — 10 climate trainers already certified in 2024."],
+    ["Transparency", "Activity and financial reports are published every year in the Resources section."],
   ],
+  finance_fr:
+    "En 2024, ECOS Mali a engagé 18 896 236 FCFA de charges (+9,65 % sur un an), financées à 64 % par des subventions, 34 % par des dons et 2 % par les cotisations des membres. Le détail complet figure dans le rapport financier téléchargeable ci-dessous.",
+  finance_en:
+    "In 2024, ECOS Mali spent 18,896,236 FCFA (+9.65% year-on-year), funded 64% by grants, 34% by donations and 2% by member dues. Full details are in the downloadable financial report below.",
 } as const;
 
 // `file` reste `null` tant que le document n'a pas été déposé dans public/documents/.
@@ -136,16 +142,15 @@ export const antennas = {
     lead_fr: "Président : Esaïe Kamaté", lead_en: "President: Esaïe Kamaté",
     intro_fr: "ECOS Mali agit à Bamako et dans ses environs pour l'éducation, l'insertion des jeunes et la résilience climatique des communautés.",
     intro_en: "ECOS Mali works in and around Bamako on education, youth integration and community climate resilience.",
-    // Contenu provisoire — à relire et corriger par l'antenne.
     missions_fr: [
-      ["Bibliothèques sous les manguiers", "Des espaces de lecture en plein air installés au cœur des quartiers, animés par des bénévoles formés."],
-      ["Formation professionnelle", "Menuiserie et métiers manuels : un parcours d'apprentissage pour les jeunes déscolarisés."],
-      ["Résilience climatique", "Formation de relais communautaires aux pratiques agroécologiques et à la gestion de l'eau."],
+      ["Bibliothèques sous les manguiers", "Nées en 2002 à Heremankono : 48 séances tenues en 2024, 50 enfants suivis (dont 60 % de filles), avec l'appui de 5 jeunes bénévoles."],
+      ["Formation agropastorale", "52 jeunes en situation de précarité formés en 2024 — dont 34 déplacés par le conflit — avec 62 % d'insertion en micro-projets locaux."],
+      ["Résilience climatique", "10 formateurs communautaires certifiés lors de l'atelier de Tiebani (septembre 2024), relais des pratiques résilientes sur le terrain."],
     ],
     missions_en: [
-      ["Libraries under the mango trees", "Open-air reading spaces set up in the heart of neighbourhoods, run by trained volunteers."],
-      ["Vocational training", "Carpentry and manual trades: an apprenticeship path for young people out of school."],
-      ["Climate resilience", "Training community facilitators in agroecological practices and water management."],
+      ["Libraries under the mango trees", "Started in 2002 in Heremankono: 48 sessions held in 2024, 50 children supported (60% girls), backed by 5 young volunteers."],
+      ["Agropastoral training", "52 young people in precarious situations trained in 2024 — including 34 displaced by conflict — with 62% moving into local micro-projects."],
+      ["Climate resilience", "10 community trainers certified at the Tiebani workshop (September 2024), carrying resilient practices into the field."],
     ],
   },
   burkina: {
