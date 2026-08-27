@@ -5,6 +5,7 @@ import { content, initialPosts, gallery, antennas, about, resources } from "../.
 import { supabase } from "../../lib/supabase";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import ContactForm from "../components/ContactForm";
 
 type Post = { id: string; slug: string; title_fr: string; title_en: string | null; excerpt_fr: string | null; excerpt_en: string | null; scopes: ("portal" | "mali" | "burkina")[]; cover_image_path: string | null };
 
@@ -90,7 +91,13 @@ export default async function Home({ params }: { params: Promise<{ locale: "fr" 
       <section id="contact" className="section"><div className="shell"><h2>{locale === "fr" ? "Deux ancrages, une vision" : "Two anchors, one vision"}</h2><div className="grid">
         <Link href={`/${locale}/ecos-mali`} className="card anchor-card"><Image src={antennas.mali.logo} alt="ECOS Mali" width={90} height={63} /><h3>ECOS Mali</h3><p>{antennas.mali.location_fr}<br />{antennas.mali.lead_fr}</p></Link>
         <Link href={`/${locale}/ecos-burkina`} className="card anchor-card"><Image src={antennas.burkina.logo} alt="ECOS Burkina Faso" width={90} height={44} /><h3>ECOS Burkina Faso</h3><p>{antennas.burkina.location_fr}<br />{antennas.burkina.lead_fr}</p></Link>
-      </div></div></section>
+      </div>
+      <div className="contact-form-wrap">
+        <h3>{locale === "fr" ? "Nous contacter" : "Get in touch"}</h3>
+        <p className="section-lead">{locale === "fr" ? "Une question, un projet de partenariat, une envie de soutenir nos actions ? Écrivez-nous." : "A question, a partnership idea, or you'd like to support our work? Write to us."}</p>
+        <ContactForm locale={locale} />
+      </div>
+      </div></section>
     </main>
     <SiteFooter locale={locale} />
   </>;

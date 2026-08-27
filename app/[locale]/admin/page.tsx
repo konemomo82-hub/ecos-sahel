@@ -33,6 +33,11 @@ const scopeLabel: Record<Scope, string> = { portal: "ECOS Sahel (portail)", mali
 
 type MediaFile = { name: string; url: string; created_at?: string | null };
 
+type ContactMessage = {
+  id: string; name: string; email: string; organization: string | null;
+  scope: Scope; message: string; is_read: boolean; created_at: string;
+};
+
 export default function AdminPage() {
   if (!supabase) {
     return <div className="admin-shell"><div className="admin-card">
@@ -56,9 +61,11 @@ function AdminInner() {
   const [saveError, setSaveError] = useState("");
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [view, setView] = useState<"posts" | "media">("posts");
+  const [view, setView] = useState<"posts" | "media" | "messages">("posts");
   const [media, setMedia] = useState<MediaFile[]>([]);
   const [loadingMedia, setLoadingMedia] = useState(false);
+  const [messages, setMessages] = useState<ContactMessage[]>([]);
+  const [loadingMessages, setLoadingMessages] = useState(false);
   const contentFrRef = useRef<HTMLTextAreaElement>(null);
   const contentEnRef = useRef<HTMLTextAreaElement>(null);
 
@@ -99,6 +106,27 @@ function AdminInner() {
   }, [session]);
 
   useEffect(() => { if (view === "media") loadMedia(); }, [view, loadMedia]);
+
+  const loadMessages = useCallback(() => {
+    if (!session) return;
+    setLoadingMessages(true);
+    supabase!.from("contact_messages").select("*").order("created_at", { ascending: false })
+      .then(({ data }) => { setMessages((data as ContactMessage[]) ?? []); setLoadingMessages(false); });
+  }, [session]);
+
+  useEffect(() => { if (view === "messages") loadMessages(); }, [view, loadMessages]);
+  useEffect(() => { loadMessages(); }, [loadMessages]);
+
+  async function handleMarkRead(id: string, isRead: boolean) {
+    await supabase!.from("contact_messages").update({ is_read: isRead }).eq("id", id);
+    loadMessages();
+  }
+
+  async function handleDeleteMessage(id: string) {
+    if (!confirm("Supprimer définitivement ce message ?")) return;
+    await supabase!.from("contact_messages").delete().eq("id", id);
+    loadMessages();
+  }
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -239,6 +267,9 @@ function AdminInner() {
         <div className="admin-tabs">
           <button className={`admin-tab ${view === "posts" ? "active" : ""}`} onClick={() => setView("posts")}>Articles</button>
           <button className={`admin-tab ${view === "media" ? "active" : ""}`} onClick={() => setView("media")}>Médiathèque</button>
+          <button className={`admin-tab ${view === "messages" ? "active" : ""}`} onClick={() => setView("messages")}>
+            Messages{messages.some((m) => !m.is_read) && <span className="admin-badge">{messages.filter((m) => !m.is_read).length}</span>}
+          </button>
         </div>
       )}
 
@@ -301,7 +332,7 @@ function AdminInner() {
             </div>
           )}
         </>
-      ) : (
+      ) : view === "media" ? (
         <>
           <p className="admin-hint">Images envoyées via les articles. Supprimer une image ici la retire aussi de tout article qui l&apos;utilise encore.</p>
           {loadingMedia ? <p>Chargement…</p> : (
@@ -311,6 +342,30 @@ function AdminInner() {
                 <div className="admin-media-item" key={m.name}>
                   <img src={m.url} alt="" />
                   <button className="button ghost admin-danger" onClick={() => handleDeleteMedia(m.name)}>Supprimer</button>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          {loadingMessages ? <p>Chargement…</p> : (
+            <div className="admin-list">
+              {messages.length === 0 && <p>Aucun message reçu pour le moment.</p>}
+              {messages.map((m) => (
+                <div className={`admin-list-item admin-message ${m.is_read ? "" : "admin-message-unread"}`} key={m.id}>
+                  <div>
+                    <span className="admin-tag">{scopeLabel[m.scope]}</span>
+                    {!m.is_read && <span className="admin-status admin-status-draft">Non lu</span>}
+                    <strong>{m.name}</strong> · <a href={`mailto:${m.email}`}>{m.email}</a>
+                    {m.organization && <div className="admin-message-org">{m.organization}</div>}
+                    <p className="admin-message-body">{m.message}</p>
+                    <span className="admin-message-date">{new Date(m.created_at).toLocaleString("fr-FR")}</span>
+                  </div>
+                  <div className="admin-actions">
+                    <button className="button ghost" onClick={() => handleMarkRead(m.id, !m.is_read)}>{m.is_read ? "Marquer non lu" : "Marquer lu"}</button>
+                    <button className="button ghost admin-danger" onClick={() => handleDeleteMessage(m.id)}>Supprimer</button>
+                  </div>
                 </div>
               ))}
             </div>
