@@ -231,7 +231,7 @@ function AdminInner() {
   return (
     <div className="admin-shell admin-wide">
       <div className="admin-topbar">
-        <div><strong>{session.user.email}</strong> — {role ?? "rôle en cours de chargement…"}</div>
+        <div><strong>{session.user.email}</strong> · {role ?? "rôle en cours de chargement…"}</div>
         <button className="button ghost" onClick={handleLogout}>Se déconnecter</button>
       </div>
 

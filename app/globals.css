@@ -63,7 +63,10 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .resource-soon { margin-top:auto; padding-top:14px; color:#7b8a84; font-size:.88rem; font-style:italic; }
 
 /* Antennes — missions */
-.antenna-missions { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.antenna-missions { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; align-items:start; }
+.mission-card p { margin-bottom:14px; }
+.mission-points { margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px; font-size:.92rem; color:#4a5f57; }
+.mission-points li { line-height:1.4; }
 
 @media (max-width:760px) {
   .nav-desktop, .locale-desktop { display:none; }

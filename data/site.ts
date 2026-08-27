@@ -13,10 +13,10 @@ export const content = {
     heroTitle: "Éduquer, inclure et construire des communautés résilientes.",
     heroText: "ECOS agit au Mali et au Burkina Faso pour offrir aux enfants, aux jeunes et aux communautés vulnérables des opportunités d'apprentissage, d'autonomie et d'engagement citoyen.",
     programs: [
-      ["Éducation", "Bibliothèques sous les manguiers et accès à la lecture."],
-      ["Jeunesse", "Formation et insertion agropastorale des jeunes."],
-      ["Climat", "Sensibilisation, agroécologie et résilience communautaire."],
-      ["Cohésion sociale", "Initiatives locales pour le vivre-ensemble."],
+      ["Éducation", "Des bibliothèques installées sous les manguiers, pour donner le goût de la lecture aux enfants du quartier."],
+      ["Jeunesse", "Des jeunes formés aux métiers de la terre, pour qu'ils puissent vivre de leur travail sans quitter leur village."],
+      ["Climat", "Des formations et des reboisements pour aider les familles à mieux vivre les sécheresses et les pluies imprévisibles."],
+      ["Cohésion sociale", "Des espaces de dialogue entre jeunes, femmes et anciens, pour apaiser les tensions et avancer ensemble."],
     ],
   },
   en: {
@@ -33,42 +33,42 @@ export const content = {
     heroTitle: "Educating, including and building resilient communities.",
     heroText: "ECOS works in Mali and Burkina Faso to give children, young people and vulnerable communities opportunities to learn, become self-reliant and take civic action.",
     programs: [
-      ["Education", "Libraries under mango trees and access to reading."],
-      ["Youth", "Training and agropastoral integration for young people."],
-      ["Climate", "Awareness, agroecology and community resilience."],
-      ["Social cohesion", "Local initiatives that strengthen living together."],
+      ["Education", "Libraries set up in the shade of mango trees, to give neighbourhood children a taste for reading."],
+      ["Youth", "Young people trained in land-based trades, so they can make a living without leaving their village."],
+      ["Climate", "Training and reforestation to help families cope with droughts and unpredictable rains."],
+      ["Social cohesion", "Spaces for dialogue between young people, women and elders, to ease tensions and move forward together."],
     ],
   },
 } as const;
 
-// Contenu provisoire — à relire et corriger par ECOS Sahel.
+// Contenu provisoire, à relire et corriger par ECOS Sahel.
 export const about = {
   intro_fr:
-    "ECOS Sahel est le portail commun de deux associations sœurs, ECOS Mali et ECOS Burkina Faso. Nées d'un même constat — l'éducation et la cohésion sociale sont les premiers leviers de résilience au Sahel — elles partagent une méthode : partir des besoins exprimés par les communautés, former des relais locaux, et inscrire chaque action dans la durée.",
+    "ECOS Sahel est le portail commun de deux associations sœurs, ECOS Mali et ECOS Burkina Faso. Elles sont nées du même constat, à savoir que l'éducation et la cohésion sociale sont les premiers leviers de résilience au Sahel, et elles partagent une méthode : partir des besoins exprimés par les communautés, former des relais locaux, et inscrire chaque action dans la durée.",
   intro_en:
-    "ECOS Sahel is the shared portal of two sister associations, ECOS Mali and ECOS Burkina Faso. Born from the same conviction — that education and social cohesion are the first levers of resilience in the Sahel — they share one method: start from the needs communities express, train local facilitators, and build every action to last.",
+    "ECOS Sahel is the shared portal of two sister associations, ECOS Mali and ECOS Burkina Faso. They were born from the same conviction, that education and social cohesion are the first levers of resilience in the Sahel, and they share one method: start from the needs communities express, train local facilitators, and build every action to last.",
   story_fr: [
     "Tout commence en 2002 à Heremankono (quartier de Baco Djicoroni, Bamako), avec les « bibliothèques sous les manguiers » : des bénévoles installent la lecture et le soutien scolaire à l'ombre des arbres, sans inscription ni frais. L'initiative associative se structure à partir de 2004 autour des enfants et des jeunes de Baco Djicoroni, Kalabancoro et Sanankoroba.",
     "ECOS Mali obtient sa reconnaissance officielle le 12 juillet 2021 (agrément N°0413/G-DB, ministère malien de l'Administration territoriale et de la Décentralisation). L'association étend alors son action à la formation agropastorale des jeunes en situation de précarité et aux formations sur le changement climatique.",
     "L'expérience essaime ensuite au Burkina Faso : ECOS Burkina Faso, fondée à Ouagadougou et reconnue en 2024, s'appuie sur le savoir-faire malien en agropastoral tout en développant sa propre dynamique de solidarité communautaire.",
-    "Les deux antennes restent autonomes — chacune avec son bureau, ses partenaires et ses financements — mais mutualisent leurs outils, leurs contenus pédagogiques et leur communication à travers ce portail.",
+    "Les deux antennes restent autonomes, chacune avec son bureau, ses partenaires et ses financements, mais elles mutualisent leurs outils, leurs contenus pédagogiques et leur communication à travers ce portail.",
   ],
   story_en: [
     "It began in 2002 in Heremankono (Baco Djicoroni, Bamako), with the \"libraries under the mango trees\": volunteers set up reading support in the shade of the trees, with no registration and no fees. The association took shape from 2004 around the children and young people of Baco Djicoroni, Kalabancoro and Sanankoroba.",
     "ECOS Mali received official recognition on 12 July 2021 (registration N°0413/G-DB, Malian Ministry of Territorial Administration and Decentralisation). The association then expanded into agropastoral training for young people in precarious situations and climate-change training.",
     "The approach then spread to Burkina Faso: ECOS Burkina Faso, founded in Ouagadougou and formally recognised in 2024, draws on ECOS Mali's agropastoral know-how while building its own community-solidarity dynamic.",
-    "The two branches remain autonomous — each with its own board, partners and funding — but share their tools, teaching materials and communications through this portal.",
+    "The two branches remain autonomous, each with its own board, partners and funding, but they share their tools, teaching materials and communications through this portal.",
   ],
   values_fr: [
     ["Proximité", "Les projets sont conçus et pilotés par des équipes qui vivent dans les communautés concernées."],
     ["Gratuité d'accès", "Les activités éducatives sont ouvertes à tous les enfants, sans condition d'inscription ni de ressources."],
-    ["Transmission", "Chaque action forme des relais locaux capables de la poursuivre sans nous — 10 formateurs climat déjà certifiés en 2024."],
+    ["Transmission", "Chaque action forme des relais locaux capables de la poursuivre sans nous : 10 formateurs climat étaient déjà certifiés en 2024."],
     ["Transparence", "Rapports moral et financier publiés chaque année dans la rubrique Ressources."],
   ],
   values_en: [
     ["Proximity", "Projects are designed and run by teams who live in the communities they serve."],
     ["Free access", "Educational activities are open to every child, with no registration or income requirement."],
-    ["Handover", "Every action trains local facilitators able to carry it on without us — 10 climate trainers already certified in 2024."],
+    ["Handover", "Every action trains local facilitators able to carry it on without us: 10 climate trainers were already certified in 2024."],
     ["Transparency", "Activity and financial reports are published every year in the Resources section."],
   ],
   finance_fr:
@@ -85,25 +85,25 @@ export const resources: {
   file: string | null;
 }[] = [
   {
-    title_fr: "Statuts et règlement intérieur — ECOS Mali", title_en: "Bylaws and internal rules — ECOS Mali",
+    title_fr: "Statuts et règlement intérieur d'ECOS Mali", title_en: "Bylaws and internal rules of ECOS Mali",
     desc_fr: "Statuts déposés et règlement intérieur de l'association ECOS Mali.",
     desc_en: "Filed articles of association and internal rules for ECOS Mali.",
     file: "/documents/statuts-reglement-ecos-mali.pdf",
   },
   {
-    title_fr: "Statuts et règlement intérieur — ECOS Burkina Faso", title_en: "Bylaws and internal rules — ECOS Burkina Faso",
+    title_fr: "Statuts et règlement intérieur d'ECOS Burkina Faso", title_en: "Bylaws and internal rules of ECOS Burkina Faso",
     desc_fr: "Statuts déposés et règlement intérieur de l'association ECOS Burkina Faso.",
     desc_en: "Filed articles of association and internal rules for ECOS Burkina Faso.",
     file: "/documents/statuts-reglement-ecos-burkina.pdf",
   },
   {
-    title_fr: "Rapport moral 2024 — ECOS Mali", title_en: "2024 activity report — ECOS Mali",
+    title_fr: "Rapport moral 2024 d'ECOS Mali", title_en: "ECOS Mali's 2024 activity report",
     desc_fr: "Bilan des actions et de la vie associative d'ECOS Mali pour 2024.",
     desc_en: "Review of ECOS Mali's activities and association life for 2024.",
     file: "/documents/rapport-moral-mali-2024.pdf",
   },
   {
-    title_fr: "Rapport financier 2024 — ECOS Mali", title_en: "2024 financial report — ECOS Mali",
+    title_fr: "Rapport financier 2024 d'ECOS Mali", title_en: "ECOS Mali's 2024 financial report",
     desc_fr: "Bilan financier et comptes annuels d'ECOS Mali pour 2024.",
     desc_en: "Financial statements and annual accounts for ECOS Mali, 2024.",
     file: "/documents/rapport-financier-mali-2024.pdf",
@@ -143,14 +143,80 @@ export const antennas = {
     intro_fr: "ECOS Mali agit à Bamako et dans ses environs pour l'éducation, l'insertion des jeunes et la résilience climatique des communautés.",
     intro_en: "ECOS Mali works in and around Bamako on education, youth integration and community climate resilience.",
     missions_fr: [
-      ["Bibliothèques sous les manguiers", "Nées en 2002 à Heremankono : 48 séances tenues en 2024, 50 enfants suivis (dont 60 % de filles), avec l'appui de 5 jeunes bénévoles."],
-      ["Formation agropastorale", "52 jeunes en situation de précarité formés en 2024 — dont 34 déplacés par le conflit — avec 62 % d'insertion en micro-projets locaux."],
-      ["Résilience climatique", "10 formateurs communautaires certifiés lors de l'atelier de Tiebani (septembre 2024), relais des pratiques résilientes sur le terrain."],
+      {
+        title: "Bibliothèques sous les manguiers",
+        text: "L'accès aux livres reste difficile dans beaucoup de quartiers au Mali. Depuis 2002, ECOS Mali installe des bibliothèques à l'ombre des manguiers d'Heremankono. Pas besoin de s'inscrire, pas de frais à payer : juste un coin où les enfants peuvent lire, écouter des contes et faire leurs devoirs avec un adulte présent. En 2024, ça représente 48 séances tenues, 50 enfants suivis (dont 60 % de filles), avec l'appui de 5 jeunes bénévoles.",
+        points: [
+          "Des bibliothèques installées directement dans les quartiers, sans inscription.",
+          "Des séances de contes, des clubs de lecture et du soutien scolaire.",
+          "Des livres et manuels adaptés aux réalités locales.",
+        ],
+      },
+      {
+        title: "Formation agropastorale",
+        text: "Beaucoup de jeunes maliens quittent leur village faute de perspectives. ECOS Mali les forme aux métiers de la terre (pisciculture, maraîchage bio, transformation locale) pour qu'ils puissent gagner leur vie sans partir. En 2024, 52 jeunes en situation de précarité, dont 34 déplacés par le conflit, ont suivi cette formation, et 62 % d'entre eux ont depuis lancé un micro-projet.",
+        points: [
+          "Formation pratique en élevage, maraîchage et pisciculture.",
+          "Accompagnement à la création de petites activités génératrices de revenus.",
+          "Un suivi individuel pour aider chacun à démarrer son projet.",
+        ],
+      },
+      {
+        title: "Résilience climatique",
+        text: "Sécheresses, sols épuisés, pluies de plus en plus imprévisibles : les familles du Sahel sont en première ligne du changement climatique. ECOS Mali forme des relais communautaires aux pratiques agroécologiques et au reboisement, pour que ce savoir reste sur place bien après notre passage. Dix formateurs ont été certifiés lors de l'atelier de Tiebani, en septembre 2024.",
+        points: [
+          "Des formations en agroécologie et en gestion de l'eau.",
+          "Des campagnes de reboisement avec les habitants.",
+          "Des relais locaux capables de transmettre ces pratiques à leur tour.",
+        ],
+      },
+      {
+        title: "Cohésion sociale",
+        text: "La paix ne se décrète pas, elle se construit au quotidien. ECOS Mali crée des espaces où jeunes, femmes et autorités coutumières peuvent se parler, régler leurs différends et monter des projets ensemble, en s'appuyant sur les manières traditionnelles de faire de la médiation.",
+        points: [
+          "Des rencontres régulières entre générations et groupes du quartier.",
+          "Un soutien aux initiatives portées par les femmes et les jeunes.",
+          "Un travail de fond sur la gestion pacifique des conflits.",
+        ],
+      },
     ],
     missions_en: [
-      ["Libraries under the mango trees", "Started in 2002 in Heremankono: 48 sessions held in 2024, 50 children supported (60% girls), backed by 5 young volunteers."],
-      ["Agropastoral training", "52 young people in precarious situations trained in 2024 — including 34 displaced by conflict — with 62% moving into local micro-projects."],
-      ["Climate resilience", "10 community trainers certified at the Tiebani workshop (September 2024), carrying resilient practices into the field."],
+      {
+        title: "Libraries under the mango trees",
+        text: "Access to books is still hard to come by in many Malian neighbourhoods. Since 2002, ECOS Mali has been setting up libraries in the shade of the mango trees in Heremankono. No registration, no fees: just a place where children can read, listen to stories, and do their homework with an adult nearby. In 2024 that meant 48 sessions held, 50 children supported (60% girls), backed by 5 young volunteers.",
+        points: [
+          "Libraries set up directly in neighbourhoods, no registration needed.",
+          "Storytelling sessions, reading clubs and homework support.",
+          "Books and materials suited to the local context.",
+        ],
+      },
+      {
+        title: "Agropastoral training",
+        text: "Many young Malians leave their villages for lack of opportunities. ECOS Mali trains them in land-based trades (fish farming, organic market gardening, local food processing) so they can make a living without leaving home. In 2024, 52 young people in precarious situations, including 34 displaced by conflict, went through this training, and 62% of them have since started a small project of their own.",
+        points: [
+          "Hands-on training in livestock, market gardening and fish farming.",
+          "Support setting up small income-generating activities.",
+          "One-to-one follow-up to help each person get their project off the ground.",
+        ],
+      },
+      {
+        title: "Climate resilience",
+        text: "Droughts, worn-out soil, increasingly unpredictable rains: Sahel families are on the front line of climate change. ECOS Mali trains community facilitators in agroecological practices and reforestation, so this knowledge stays in place long after we've moved on. Ten trainers were certified at the Tiebani workshop in September 2024.",
+        points: [
+          "Training in agroecology and water management.",
+          "Reforestation campaigns with local residents.",
+          "Local facilitators able to pass these practices on in turn.",
+        ],
+      },
+      {
+        title: "Social cohesion",
+        text: "Peace isn't declared, it's built day by day. ECOS Mali creates spaces where young people, women and customary authorities can talk to each other, resolve disagreements and build projects together, drawing on traditional ways of mediating conflict.",
+        points: [
+          "Regular meetings across generations and neighbourhood groups.",
+          "Support for initiatives led by women and young people.",
+          "Sustained work on peaceful conflict resolution.",
+        ],
+      },
     ],
   },
   burkina: {
@@ -160,16 +226,63 @@ export const antennas = {
     lead_fr: "Président : Ibrahima KONE", lead_en: "President: Ibrahima KONE",
     intro_fr: "ECOS Burkina Faso mobilise les jeunes autour de l'agroécologie, de la solidarité communautaire et de la cohésion sociale.",
     intro_en: "ECOS Burkina Faso mobilises young people around agroecology, community solidarity and social cohesion.",
-    // Contenu provisoire — à relire et corriger par l'antenne.
     missions_fr: [
-      ["Pépinières et reboisement", "Production de plants et campagnes de plantation communautaire avec les écoles et les quartiers."],
-      ["Maraîchage sous serre", "Installation de serres et accompagnement technique des jeunes producteurs."],
-      ["Solidarité et cohésion", "Actions de terrain comme Kaya Nooma : distributions solidaires et temps de rencontre intercommunautaires."],
+      {
+        title: "Pépinières et reboisement",
+        text: "Le désert avance et les terres s'appauvrissent au Burkina Faso. ECOS Burkina Faso participe à l'effort national de la Ceinture Verte en faisant pousser des plants en pépinière et en organisant des journées de plantation avec les écoles et les quartiers, pour redonner un peu de vert au paysage et transmettre aux jeunes le réflexe de prendre soin de leur environnement.",
+        points: [
+          "Production de plants forestiers et fruitiers adaptés au climat local.",
+          "Journées de reboisement avec les écoles et les habitants.",
+          "Une contribution concrète à la Ceinture Verte nationale.",
+        ],
+      },
+      {
+        title: "Maraîchage sous serre",
+        text: "Avec des terres plus rares et de l'eau qui manque, cultiver devient un défi. ECOS Burkina Faso forme les producteurs, les femmes et les jeunes à la culture sous serre et hors sol : une méthode qui économise l'eau, protège les récoltes et permet de produire toute l'année, en ville comme à la campagne.",
+        points: [
+          "Des formations pratiques à la culture sous serre.",
+          "L'installation de serres simples, adaptées aux petits espaces.",
+          "Des revenus plus stables pour les familles.",
+        ],
+      },
+      {
+        title: "Solidarité et cohésion",
+        text: "Le contexte humanitaire au Burkina Faso reste difficile, avec de nombreuses familles déplacées par les crises. ECOS Burkina Faso leur apporte un soutien concret (vivres, kits de première nécessité) et organise des temps de rencontre comme Kaya Nooma, pour recréer du lien entre familles déplacées et communautés d'accueil.",
+        points: [
+          "Des distributions de vivres et de kits d'urgence aux familles déplacées.",
+          "Des événements de rencontre comme Kaya Nooma.",
+          "Un travail de fond pour renforcer le dialogue entre communautés.",
+        ],
+      },
     ],
     missions_en: [
-      ["Nurseries and reforestation", "Growing seedlings and running community planting campaigns with schools and neighbourhoods."],
-      ["Greenhouse market gardening", "Setting up greenhouses and providing technical support to young growers."],
-      ["Solidarity and cohesion", "Field actions such as Kaya Nooma: solidarity distributions and intercommunity gatherings."],
+      {
+        title: "Nurseries and reforestation",
+        text: "The desert is advancing and the land is wearing thin in Burkina Faso. ECOS Burkina Faso takes part in the national Green Belt effort by growing seedlings in nurseries and organising planting days with schools and neighbourhoods, bringing a little green back to the landscape and passing on to young people the habit of caring for their environment.",
+        points: [
+          "Growing forest and fruit seedlings suited to the local climate.",
+          "Reforestation days with schools and residents.",
+          "A concrete contribution to the national Green Belt.",
+        ],
+      },
+      {
+        title: "Greenhouse market gardening",
+        text: "With land growing scarcer and water in short supply, farming is becoming harder. ECOS Burkina Faso trains growers, women and young people in greenhouse and soil-free growing methods: an approach that saves water, protects crops and allows year-round production, in the city as much as in the countryside.",
+        points: [
+          "Hands-on training in greenhouse growing.",
+          "Simple greenhouses suited to small spaces.",
+          "More stable income for families.",
+        ],
+      },
+      {
+        title: "Solidarity and cohesion",
+        text: "The humanitarian situation in Burkina Faso remains difficult, with many families displaced by crises. ECOS Burkina Faso provides them with practical support (food, essential-needs kits) and organises gatherings such as Kaya Nooma, to rebuild ties between displaced families and host communities.",
+        points: [
+          "Food and emergency-kit distributions for displaced families.",
+          "Gatherings such as Kaya Nooma.",
+          "Sustained work to strengthen dialogue between communities.",
+        ],
+      },
     ],
   },
 } as const;

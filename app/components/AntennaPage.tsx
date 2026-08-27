@@ -36,8 +36,12 @@ export async function renderAntennaPage(scopeKey: "mali" | "burkina", locale: "f
         </div></section>
         <section className="section white"><div className="shell">
           <h2>{locale === "fr" ? "Nos actions sur le terrain" : "Our work on the ground"}</h2>
-          <div className="antenna-missions">{missions.map(([title, text]) => (
-            <article className="card" key={title}><h3>{title}</h3><p>{text}</p></article>
+          <div className="antenna-missions">{missions.map((m) => (
+            <article className="card mission-card" key={m.title}>
+              <h3>{m.title}</h3>
+              <p>{m.text}</p>
+              <ul className="mission-points">{m.points.map((point) => <li key={point}>{point}</li>)}</ul>
+            </article>
           ))}</div>
         </div></section>
         <section className="section"><div className="shell">
