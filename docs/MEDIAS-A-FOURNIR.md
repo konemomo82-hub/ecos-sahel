@@ -6,28 +6,22 @@ aucun lien mort — les ressources non fournies s'affichent en « Bientôt dispo
 
 ## 1. Documents de la rubrique Ressources
 
-Déposer les PDF dans `public/documents/`, puis renseigner le champ `file` correspondant
-dans le tableau `resources` de [`data/site.ts`](../data/site.ts).
+Déposer les PDF dans `public/documents/`, avec exactement ces noms de fichiers
+(déjà renseignés dans `data/site.ts`, aucune modification de code nécessaire si les
+noms correspondent) :
 
-| Document | Nom de fichier suggéré | `file` à renseigner |
+| Document | Nom de fichier exact | Statut |
 | --- | --- | --- |
-| Statuts de l'association | `statuts-ecos.pdf` | `"/documents/statuts-ecos.pdf"` |
-| Rapport d'activités 2024 | `rapport-activites-2024.pdf` | `"/documents/rapport-activites-2024.pdf"` |
-| Plaquette de présentation | `plaquette-ecos-sahel.pdf` | `"/documents/plaquette-ecos-sahel.pdf"` |
-| Dossier de partenariat | `dossier-partenariat.pdf` | `"/documents/dossier-partenariat.pdf"` |
+| Statuts et règlement — ECOS Mali | `statuts-reglement-ecos-mali.pdf` | ✅ à déposer |
+| Statuts et règlement — ECOS Burkina Faso | `statuts-reglement-ecos-burkina.pdf` | ✅ à déposer |
+| Rapport moral 2024 — ECOS Mali | `rapport-moral-mali-2024.pdf` | ✅ à déposer |
+| Rapport financier 2024 — ECOS Mali | `rapport-financier-mali-2024.pdf` | ✅ à déposer |
+| Plaquette de présentation | `plaquette-ecos-sahel.pdf` | En attente |
+| Dossier de partenariat | `dossier-partenariat.pdf` | En attente |
 
-Exemple de modification :
-
-```ts
-{
-  title_fr: "Rapport d'activités 2024", title_en: "2024 activity report",
-  desc_fr: "…", desc_en: "…",
-  file: "/documents/rapport-activites-2024.pdf",   // au lieu de null
-},
-```
-
-Pour ajouter un document qui n'est pas dans la liste, copier une entrée du tableau et
-adapter les quatre champs de texte + `file`.
+Pour ajouter un document qui n'est pas dans la liste, copier une entrée du tableau
+`resources` dans [`data/site.ts`](../data/site.ts) et adapter les quatre champs de
+texte + `file`.
 
 ## 2. Logos
 
@@ -35,10 +29,7 @@ adapter les quatre champs de texte + `file`.
 | --- | --- | --- |
 | `public/logos/logo-ecos-sahel.png` | OK, fond transparent | — |
 | `public/logos/logo-ecos-mali.png` | OK, fond transparent | — |
-| `public/logos/logo-ecos-burkina.png` | Basse résolution (294 × 145 px) | Remplacer par un fichier d'au moins 600 px de large, fond transparent, même nom de fichier |
-
-Garder les mêmes noms de fichiers : aucun code n'est à modifier, il suffit d'écraser
-le fichier existant.
+| `public/logos/logo-ecos-burkina.png` | ✅ Mis à jour (700 px, fond transparent, extrait du règlement intérieur officiel) | — |
 
 ## 3. Photos
 

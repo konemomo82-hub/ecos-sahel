@@ -79,16 +79,28 @@ export const resources: {
   file: string | null;
 }[] = [
   {
-    title_fr: "Statuts de l'association", title_en: "Articles of association",
-    desc_fr: "Statuts déposés d'ECOS Mali et d'ECOS Burkina Faso.",
-    desc_en: "Filed articles of association for ECOS Mali and ECOS Burkina Faso.",
-    file: null,
+    title_fr: "Statuts et règlement intérieur — ECOS Mali", title_en: "Bylaws and internal rules — ECOS Mali",
+    desc_fr: "Statuts déposés et règlement intérieur de l'association ECOS Mali.",
+    desc_en: "Filed articles of association and internal rules for ECOS Mali.",
+    file: "/documents/statuts-reglement-ecos-mali.pdf",
   },
   {
-    title_fr: "Rapport d'activités 2024", title_en: "2024 activity report",
-    desc_fr: "Bilan des programmes éducation, jeunesse, climat et cohésion sociale.",
-    desc_en: "Review of the education, youth, climate and social-cohesion programmes.",
-    file: null,
+    title_fr: "Statuts et règlement intérieur — ECOS Burkina Faso", title_en: "Bylaws and internal rules — ECOS Burkina Faso",
+    desc_fr: "Statuts déposés et règlement intérieur de l'association ECOS Burkina Faso.",
+    desc_en: "Filed articles of association and internal rules for ECOS Burkina Faso.",
+    file: "/documents/statuts-reglement-ecos-burkina.pdf",
+  },
+  {
+    title_fr: "Rapport moral 2024 — ECOS Mali", title_en: "2024 activity report — ECOS Mali",
+    desc_fr: "Bilan des actions et de la vie associative d'ECOS Mali pour 2024.",
+    desc_en: "Review of ECOS Mali's activities and association life for 2024.",
+    file: "/documents/rapport-moral-mali-2024.pdf",
+  },
+  {
+    title_fr: "Rapport financier 2024 — ECOS Mali", title_en: "2024 financial report — ECOS Mali",
+    desc_fr: "Bilan financier et comptes annuels d'ECOS Mali pour 2024.",
+    desc_en: "Financial statements and annual accounts for ECOS Mali, 2024.",
+    file: "/documents/rapport-financier-mali-2024.pdf",
   },
   {
     title_fr: "Plaquette de présentation", title_en: "Presentation brochure",
