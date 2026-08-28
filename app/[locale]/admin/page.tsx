@@ -59,6 +59,7 @@ function AdminInner() {
   const [editingId, setEditingId] = useState<string | "new" | null>(null);
   const [draft, setDraft] = useState<typeof emptyDraft>(emptyDraft);
   const [saveError, setSaveError] = useState("");
+  const [actionError, setActionError] = useState("");
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [view, setView] = useState<"posts" | "media" | "messages">("posts");
@@ -118,13 +119,18 @@ function AdminInner() {
   useEffect(() => { loadMessages(); }, [loadMessages]);
 
   async function handleMarkRead(id: string, isRead: boolean) {
-    await supabase!.from("contact_messages").update({ is_read: isRead }).eq("id", id);
+    setActionError("");
+    const { error } = await supabase!.from("contact_messages").update({ is_read: isRead }).eq("id", id);
+    if (error) { setActionError(`Impossible de modifier ce message : ${error.message}`); return; }
     loadMessages();
   }
 
   async function handleDeleteMessage(id: string) {
     if (!confirm("Supprimer définitivement ce message ?")) return;
-    await supabase!.from("contact_messages").delete().eq("id", id);
+    setActionError("");
+    const { error, count } = await supabase!.from("contact_messages").delete({ count: "exact" }).eq("id", id);
+    if (error) { setActionError(`Suppression refusée : ${error.message}`); return; }
+    if (count === 0) { setActionError("Suppression refusée : votre rôle ne vous autorise pas à supprimer ce message."); return; }
     loadMessages();
   }
 
@@ -195,7 +201,9 @@ function AdminInner() {
 
   async function handleDeleteMedia(name: string) {
     if (!confirm("Supprimer définitivement cette image ? Elle disparaîtra de tous les articles qui l'utilisent.")) return;
-    await supabase!.storage.from("site-media").remove([name]);
+    setActionError("");
+    const { error } = await supabase!.storage.from("site-media").remove([name]);
+    if (error) { setActionError(`Suppression refusée : ${error.message}`); return; }
     loadMedia();
   }
 
@@ -233,7 +241,12 @@ function AdminInner() {
 
   async function handleDelete(id: string) {
     if (!confirm("Supprimer définitivement cet article ?")) return;
-    await supabase!.from("posts").delete().eq("id", id);
+    setActionError("");
+    // `count` distingue l'erreur explicite du refus RLS silencieux : une policy qui
+    // ne matche pas ne renvoie pas d'erreur, elle supprime simplement 0 ligne.
+    const { error, count } = await supabase!.from("posts").delete({ count: "exact" }).eq("id", id);
+    if (error) { setActionError(`Suppression refusée : ${error.message}`); return; }
+    if (count === 0) { setActionError("Suppression refusée : votre rôle ne vous autorise pas à supprimer cet article."); return; }
     loadPosts();
     notifyRevalidate();
   }
@@ -271,6 +284,10 @@ function AdminInner() {
             Messages{messages.some((m) => !m.is_read) && <span className="admin-badge">{messages.filter((m) => !m.is_read).length}</span>}
           </button>
         </div>
+      )}
+
+      {!editingId && actionError && (
+        <p className="admin-error admin-error-banner">{actionError}</p>
       )}
 
       {editingId ? (
