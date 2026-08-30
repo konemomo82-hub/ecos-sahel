@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "../../lib/supabase";
 
 type Scope = "portal" | "mali" | "burkina";
 
@@ -11,16 +10,30 @@ export default function ContactForm({ locale }: { locale: "fr" | "en" }) {
   const [organization, setOrganization] = useState("");
   const [scope, setScope] = useState<Scope>("portal");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // pot de miel anti-robots
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorText, setErrorText] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!supabase) { setStatus("error"); return; }
     setStatus("sending");
-    const { error } = await supabase.from("contact_messages").insert({
-      name, email, organization: organization || null, scope, message,
-    });
-    if (error) { setStatus("error"); return; }
+    setErrorText("");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, organization, scope, message, website }),
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        setErrorText(data.error ?? "");
+        setStatus("error");
+        return;
+      }
+    } catch {
+      setStatus("error");
+      return;
+    }
     setStatus("sent");
     setName(""); setEmail(""); setOrganization(""); setMessage(""); setScope("portal");
   }
@@ -59,7 +72,11 @@ export default function ContactForm({ locale }: { locale: "fr" | "en" }) {
       <label>{locale === "fr" ? "Message" : "Message"}*
         <textarea rows={5} value={message} onChange={(e) => setMessage(e.target.value)} required />
       </label>
-      {status === "error" && <p className="contact-error">{locale === "fr" ? "Une erreur est survenue, merci de réessayer dans un instant." : "Something went wrong, please try again in a moment."}</p>}
+      <input
+        className="contact-hp" tabIndex={-1} autoComplete="off" aria-hidden="true"
+        value={website} onChange={(e) => setWebsite(e.target.value)}
+      />
+      {status === "error" && <p className="contact-error">{errorText || (locale === "fr" ? "Une erreur est survenue, merci de réessayer dans un instant." : "Something went wrong, please try again in a moment.")}</p>}
       <button className="button" type="submit" disabled={status === "sending"}>
         {status === "sending" ? (locale === "fr" ? "Envoi…" : "Sending…") : (locale === "fr" ? "Envoyer le message" : "Send message")}
       </button>
