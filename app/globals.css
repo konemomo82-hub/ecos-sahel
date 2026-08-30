@@ -53,8 +53,6 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .contact-form input, .contact-form select, .contact-form textarea { font:inherit; padding:11px 13px; border:1px solid #cdd9d3; border-radius:6px; background:white; }
 .contact-form button { align-self:flex-start; }
 .contact-error { color:#b3261e; font-size:.88rem; margin:0; }
-/* Pot de miel : hors écran pour les humains, visible pour les robots qui remplissent tout. */
-.contact-hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
 .contact-sent { background:white; border-radius:8px; padding:28px; box-shadow:0 8px 28px #1b342111; max-width:520px; margin-top:20px; }
 @media (max-width:600px) { .contact-row { grid-template-columns:1fr; } }
 .post-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
@@ -112,7 +110,6 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .admin-card label { display:flex; flex-direction:column; gap:6px; font-size:.9rem; font-weight:600; color:var(--ink); }
 .admin-card input, .admin-card textarea { font:inherit; padding:10px 12px; border:1px solid #cdd9d3; border-radius:6px; }
 .admin-error { color:#b3261e; font-size:.88rem; margin:0; }
-.admin-error-banner { background:#fdecea; border:1px solid #f3c4bf; padding:12px 16px; border-radius:8px; margin:0 0 16px; font-weight:600; }
 .admin-topbar { display:flex; justify-content:space-between; align-items:center; background:white; padding:16px 24px; border-radius:10px; margin-bottom:20px; box-shadow:0 8px 28px #1b342111; }
 .admin-actions { display:flex; gap:10px; flex-wrap:wrap; margin:16px 0; }
 .admin-scopes { border:1px solid #cdd9d3; border-radius:6px; padding:12px 16px; display:flex; flex-direction:column; gap:8px; }
