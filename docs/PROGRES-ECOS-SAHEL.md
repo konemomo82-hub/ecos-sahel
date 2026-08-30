@@ -52,6 +52,9 @@ Un seul portail (`ecos-sahel.org`) présentant les deux antennes, avec un systè
 
 ⚠️ **Attention** : ce commit était un revert intégral du commit précédent, pas seulement un correctif de sécurité. Il avait aussi annulé la gestion d'erreur de l'admin, le pot de miel du formulaire, la redirection `www` et les variables SMTP de `.env.example`. Tout a été restauré. À l'avenir, vérifier ce qu'un `npm audit fix` emporte avec lui.
 
+24. ✅ **Domaine `ecos-sahel.org` opérationnel** (30 août 2026). ⚠️ Le site répond en **HTTP seulement** — le SSL reste à activer dans hPanel.
+25. ✅ **Boutons « Modifier » et « Supprimer » rendus visibles dans l'admin** : `.button.ghost` est défini avec bordure et texte blancs, pour le bandeau d'accueil qui est sombre. Sur les fonds blancs de l'admin, les boutons étaient invisibles — présents dans le DOM, cliquables, mais introuvables à l'œil. `.admin-danger` ne rattrapait rien : une classe contre deux, il perdait en spécificité. Réencrés via `.admin-shell .button.ghost`. Même correctif pour le bouton de confirmation du formulaire de contact.
+
 → Les 8 liens du menu mènent désormais tous quelque part. Plus aucune ancre morte.
 
 ## À faire — priorités pour la suite
