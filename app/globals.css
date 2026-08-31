@@ -96,6 +96,17 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .resource-link { margin-top:auto; padding-top:14px; color:var(--blue); font-weight:bold; font-size:.9rem; }
 .resource-soon { margin-top:auto; padding-top:14px; color:#7b8a84; font-size:.88rem; font-style:italic; }
 
+/* Plaquette de présentation des antennes — texte suivi, justifié.
+   La césure (hyphens) est indispensable ici : sans elle, le texte justifié
+   creuse de larges blancs entre les mots. Elle s'appuie sur l'attribut lang
+   posé sur le conteneur. */
+.plaquette { max-width:760px; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
+.plaquette p { font-size:1.05rem; line-height:1.8; margin:0 0 1.3em; color:#243b34; }
+.plaquette p:first-of-type { font-size:1.16rem; line-height:1.75; color:var(--ink); }
+.plaquette p:last-child { margin-bottom:0; }
+/* Sur mobile, une colonne étroite justifiée devient illisible : on repasse au fer à gauche. */
+@media (max-width:600px) { .plaquette { text-align:left; hyphens:none; } .plaquette p { font-size:1rem; line-height:1.7; } }
+
 /* Antennes — missions */
 .antenna-missions { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; align-items:start; }
 .mission-card p { margin-bottom:14px; }
