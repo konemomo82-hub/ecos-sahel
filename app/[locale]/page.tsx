@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { content, initialPosts, gallery, antennas, about, resources } from "../../data/site";
+import { content, initialPosts, gallery, antennas, about, resources, donation } from "../../data/site";
 import { supabase } from "../../lib/supabase";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
@@ -56,7 +56,7 @@ export default async function Home({ params }: { params: Promise<{ locale: "fr" 
   return <>
     <SiteHeader locale={locale} />
     <main>
-      <section className="hero"><div className="shell"><div className="eyebrow">ECOS Mali · ECOS Burkina Faso</div><h1>{copy.heroTitle}</h1><p className="lead">{copy.heroText}</p><div className="actions"><a className="button" href="#programmes">{locale === "fr" ? "Découvrir nos actions" : "Discover our work"}</a><a className="button ghost" href="#contact">{locale === "fr" ? "Devenir partenaire" : "Become a partner"}</a></div></div></section>
+      <section className="hero"><div className="shell"><div className="eyebrow">ECOS Mali · ECOS Burkina Faso</div><h1>{copy.heroTitle}</h1><p className="lead">{copy.heroText}</p><div className="actions"><a className="button" href="#programmes">{locale === "fr" ? "Découvrir nos actions" : "Discover our work"}</a><a className="button donate" href="#don">{locale === "fr" ? "Faire un don" : "Make a donation"}</a><a className="button ghost" href="#contact">{locale === "fr" ? "Devenir partenaire" : "Become a partner"}</a></div></div></section>
       <section id="a-propos" className="section"><div className="shell">
         <h2>{locale === "fr" ? "À propos d'ECOS Sahel" : "About ECOS Sahel"}</h2>
         <p className="section-lead">{locale === "en" ? about.intro_en : about.intro_fr}</p>
@@ -87,6 +87,38 @@ export default async function Home({ params }: { params: Promise<{ locale: "fr" 
             ? <a className="card resource-item" href={resource.file} target="_blank" rel="noopener noreferrer" key={title}>{inner}</a>
             : <div className="card resource-item" key={title}>{inner}</div>;
         })}</div>
+      </div></section>
+      <section id="don" className="section white"><div className="shell">
+        <h2>{locale === "fr" ? "Faire un don" : "Make a donation"}</h2>
+        <p className="section-lead">{locale === "fr" ? "Chaque don, quel que soit son montant, finance directement une action de terrain, jamais des frais de structure." : "Every donation, whatever the amount, funds a field action directly, never overhead costs."}</p>
+        <div className="grid donation-grid">
+          <article className="card donation-card">
+            <h3>ECOS Mali</h3>
+            <p className="donation-label">{locale === "fr" ? "Mobile money" : "Mobile money"}</p>
+            <p className="donation-value">{donation.mali.mobileMoney}</p>
+            <p className="donation-providers">{donation.mali.providers.join(" · ")}</p>
+          </article>
+          <article className="card donation-card">
+            <h3>ECOS Burkina Faso</h3>
+            <p className="donation-label">{locale === "fr" ? "Mobile money" : "Mobile money"}</p>
+            <p className="donation-value">{donation.burkina.mobileMoney}</p>
+            <p className="donation-providers">{donation.burkina.providers.join(" · ")}</p>
+          </article>
+          <article className="card donation-card donation-bank">
+            <h3>{locale === "fr" ? "Virement bancaire (ECOS Mali)" : "Bank transfer (ECOS Mali)"}</h3>
+            <p className="donation-label">{donation.mali.bank.name}, {donation.mali.bank.agency}</p>
+            <table className="donation-rib">
+              <tbody>
+                <tr><td>{locale === "fr" ? "Code banque" : "Bank code"}</td><td>{donation.mali.bank.codeBanque}</td></tr>
+                <tr><td>{locale === "fr" ? "Code guichet" : "Branch code"}</td><td>{donation.mali.bank.codeGuichet}</td></tr>
+                <tr><td>{locale === "fr" ? "N° de compte" : "Account number"}</td><td>{donation.mali.bank.numeroCompte}</td></tr>
+                <tr><td>{locale === "fr" ? "Clé RIB" : "RIB key"}</td><td>{donation.mali.bank.cleRib}</td></tr>
+                <tr><td>BIC</td><td>{donation.mali.bank.bic}</td></tr>
+              </tbody>
+            </table>
+            <p className="donation-address">{donation.mali.bank.address_fr}</p>
+          </article>
+        </div>
       </div></section>
       <section id="contact" className="section"><div className="shell"><h2>{locale === "fr" ? "Deux ancrages, une vision" : "Two anchors, one vision"}</h2><div className="grid">
         <Link href={`/${locale}/ecos-mali`} className="card anchor-card"><Image src={antennas.mali.logo} alt="ECOS Mali" width={90} height={63} /><h3>ECOS Mali</h3><p>{antennas.mali.location_fr}<br />{antennas.mali.lead_fr}</p></Link>

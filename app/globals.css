@@ -36,6 +36,7 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .actions { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
 .button { padding:13px 18px; border-radius:5px; background:var(--gold); color:#233126; font-weight:bold; }
 .button.ghost { border:1px solid white; background:transparent; color:white; }
+.button.donate { background:var(--blue); color:white; }
 .section { padding:72px 0; }
 .section.white { background:white; }
 .grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; }
@@ -67,6 +68,18 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .gallery-item figcaption { padding:12px 14px; font-size:.85rem; color:var(--ink); }
 .anchor-card { text-align:center; }
 .anchor-card img { object-fit:contain; margin-bottom:14px; }
+.donation-grid { grid-template-columns:repeat(3, 1fr); align-items:start; }
+.donation-card { border-top:5px solid var(--blue); }
+.donation-card h3 { margin-top:0; }
+.donation-label { font-size:.85rem; color:#5a6b64; margin:10px 0 2px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; }
+.donation-value { font-size:1.4rem; font-weight:bold; color:var(--green); margin:0 0 6px; }
+.donation-providers { font-size:.9rem; color:var(--blue); }
+.donation-bank { grid-column:span 1; }
+.donation-rib { width:100%; border-collapse:collapse; margin:12px 0; font-size:.88rem; }
+.donation-rib td { padding:5px 6px; border-bottom:1px solid #e2e9e5; }
+.donation-rib td:first-child { color:#5a6b64; }
+.donation-rib td:last-child { text-align:right; font-weight:600; color:var(--ink); }
+.donation-address { font-size:.85rem; color:#5a6b64; }
 .footer { background:#112e27; color:#dceae4; padding:42px 0; }
 .locale { font-size:.8rem; color:var(--blue); font-weight:bold; }
 /* À propos */
@@ -99,7 +112,7 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
   .mobile-nav a:hover { color:var(--green); padding-left:4px; }
   .mobile-locale { padding:16px 24px 20px; font-weight:600; }
   .mobile-locale a:hover { color:var(--green); }
-  .grid { grid-template-columns:repeat(2,1fr); } .post-grid { grid-template-columns:1fr; } .gallery { grid-template-columns:1fr; } .hero { padding:82px 0; } .resource-list { grid-template-columns:1fr; } .antenna-missions { grid-template-columns:1fr; }
+  .grid { grid-template-columns:repeat(2,1fr); } .post-grid { grid-template-columns:1fr; } .gallery { grid-template-columns:1fr; } .hero { padding:82px 0; } .resource-list { grid-template-columns:1fr; } .antenna-missions { grid-template-columns:1fr; } .donation-grid { grid-template-columns:1fr; }
 }
 
 /* Admin */

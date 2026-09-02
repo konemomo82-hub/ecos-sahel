@@ -88,13 +88,12 @@ export async function POST(request: Request) {
         text: [
           `Nom          : ${name}`,
           `Email        : ${email}`,
-          `Organisation : ${organization ?? "—"}`,
+          `Organisation : ${organization ?? "non précisée"}`,
           `Concerne     : ${scopeLabel[scope]}`,
           "",
           "Message :",
           message,
           "",
-          "—",
           "Envoyé depuis le formulaire de contact d'ecos-sahel.org",
         ].join("\n"),
       });

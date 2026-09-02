@@ -287,6 +287,30 @@ export const antennas = {
   },
 } as const;
 
+export const donation = {
+  mali: {
+    mobileMoney: "+223 77 54 61 31",
+    providers: ["Wave", "Moov Money", "Orange Money"],
+    bank: {
+      name: "Banque Malienne de Solidarité",
+      agency: "Agence de Kalaban-Coro",
+      holder: "Association ECOS",
+      address_fr: "Rue 415, porte 11, Baco Djicoroni Heremankono, Bamako, Mali",
+      address_en: "Rue 415, porte 11, Baco Djicoroni Heremankono, Bamako, Mali",
+      codeBanque: "ML043",
+      codeGuichet: "01008",
+      numeroCompte: "009001204932",
+      cleRib: "65",
+      bic: "BSAMLMBAMXX",
+    },
+  },
+  burkina: {
+    mobileMoney: "+226 76 74 52 86",
+    providers: ["Wave", "Moov Money", "Orange Money"],
+    bank: null,
+  },
+} as const;
+
 export const initialPosts = [
   { title: "Les bibliothèques sous les manguiers", scope: "mali", excerpt: "Comment un coin d'ombre et quelques livres sont devenus un rendez-vous incontournable du quartier." },
   { title: "ECOS Burkina Faso prend son envol", scope: "burkina", excerpt: "Retour sur les premiers mois d'activité de notre antenne burkinabè, entre pépinières et solidarité." },
