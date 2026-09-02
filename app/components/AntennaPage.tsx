@@ -11,7 +11,6 @@ type Post = { id: string; slug: string; title_fr: string; title_en: string | nul
 export async function renderAntennaPage(scopeKey: "mali" | "burkina", locale: "fr" | "en") {
   const antenna = antennas[scopeKey];
   const missions = locale === "en" ? antenna.missions_en : antenna.missions_fr;
-  const plaquette = locale === "en" ? antenna.plaquette_en : antenna.plaquette_fr;
   const photos = gallery.filter((photo) => photo.antenna === scopeKey);
 
   let posts: Post[] = [];
@@ -36,14 +35,6 @@ export async function renderAntennaPage(scopeKey: "mali" | "burkina", locale: "f
           <p className="antenna-meta">{locale === "en" ? antenna.location_en : antenna.location_fr} · {locale === "en" ? antenna.lead_en : antenna.lead_fr}</p>
         </div></section>
         <section className="section white"><div className="shell">
-          <h2>{locale === "fr" ? "L'association en quelques mots" : "The association in brief"}</h2>
-          {/* lang explicite : la césure automatique du texte justifié dépend de la
-              langue, et le <html> racine est figé sur fr pour les deux locales. */}
-          <div className="plaquette" lang={locale}>
-            {plaquette.map((paragraphe) => <p key={paragraphe.slice(0, 48)}>{paragraphe}</p>)}
-          </div>
-        </div></section>
-        <section className="section"><div className="shell">
           <h2>{locale === "fr" ? "Nos actions sur le terrain" : "Our work on the ground"}</h2>
           <div className="antenna-missions">{missions.map((m) => (
             <article className="card mission-card" key={m.title}>
@@ -53,7 +44,7 @@ export async function renderAntennaPage(scopeKey: "mali" | "burkina", locale: "f
             </article>
           ))}</div>
         </div></section>
-        <section className="section white"><div className="shell">
+        <section className="section"><div className="shell">
           <h2>{locale === "fr" ? "Toutes les actualités" : "All news"}</h2>
           {posts.length === 0 && <p>{locale === "fr" ? "Aucun article publié pour le moment." : "No published articles yet."}</p>}
           <div className="post-grid">
@@ -72,7 +63,7 @@ export async function renderAntennaPage(scopeKey: "mali" | "burkina", locale: "f
           </div>
         </div></section>
         {photos.length > 0 && (
-          <section className="section"><div className="shell">
+          <section className="section white"><div className="shell">
             <h2>{locale === "fr" ? `${antenna.name} en images` : `${antenna.name} in pictures`}</h2>
             <div className="gallery">{photos.map((photo) => (
               <figure className="gallery-item" key={photo.src}>

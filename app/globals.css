@@ -1,6 +1,7 @@
 :root { --green:#176b4d; --blue:#075fa9; --gold:#efb52e; --ink:#18322c; --mist:#f5f8f6; }
 * { box-sizing:border-box; }
 body { margin:0; color:var(--ink); background:var(--mist); font-family:Arial, Helvetica, sans-serif; }
+.section p, .hero p, .about-story p, .mission-card p, .article-body p, .contact-form-wrap > p, .antenna-hero p, .card p { text-align:justify; text-justify:inter-word; }
 a { color:inherit; text-decoration:none; }
 .shell { max-width:1120px; margin:auto; padding:0 24px; }
 .header { background:rgba(255,255,255,.94); backdrop-filter:blur(8px); box-shadow:0 1px 0 rgba(24,50,44,.06), 0 8px 24px rgba(24,50,44,.04); position:sticky; top:0; z-index:5; }
@@ -35,18 +36,6 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .actions { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
 .button { padding:13px 18px; border-radius:5px; background:var(--gold); color:#233126; font-weight:bold; }
 .button.ghost { border:1px solid white; background:transparent; color:white; }
-/* .button.ghost est prévu pour le bandeau d'accueil, qui est sombre : bordure et
-   texte blancs. Sur les fonds clairs — admin, confirmation du formulaire — il faut
-   le réencrer, sinon c'est du blanc sur blanc et le bouton devient invisible.
-   Les sélecteurs à deux classes ci-dessous l'emportent en spécificité. */
-.admin-shell .button.ghost,
-.contact-sent .button.ghost { border:1px solid #cdd9d3; background:white; color:var(--ink); cursor:pointer; }
-.admin-shell .button.ghost:hover,
-.contact-sent .button.ghost:hover { border-color:var(--green); color:var(--green); }
-/* Idem pour le bouton Supprimer : .admin-danger seul perdait face à .button.ghost. */
-.admin-shell .button.ghost.admin-danger { color:#b3261e; border-color:#b3261e; }
-.admin-shell .button.ghost.admin-danger:hover { background:#fdecea; color:#b3261e; border-color:#b3261e; }
-.admin-shell .button { cursor:pointer; }
 .section { padding:72px 0; }
 .section.white { background:white; }
 .grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; }
@@ -65,8 +54,6 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .contact-form input, .contact-form select, .contact-form textarea { font:inherit; padding:11px 13px; border:1px solid #cdd9d3; border-radius:6px; background:white; }
 .contact-form button { align-self:flex-start; }
 .contact-error { color:#b3261e; font-size:.88rem; margin:0; }
-/* Pot de miel : hors écran pour les humains, visible pour les robots qui remplissent tout. */
-.contact-hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
 .contact-sent { background:white; border-radius:8px; padding:28px; box-shadow:0 8px 28px #1b342111; max-width:520px; margin-top:20px; }
 @media (max-width:600px) { .contact-row { grid-template-columns:1fr; } }
 .post-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
@@ -96,17 +83,6 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .resource-link { margin-top:auto; padding-top:14px; color:var(--blue); font-weight:bold; font-size:.9rem; }
 .resource-soon { margin-top:auto; padding-top:14px; color:#7b8a84; font-size:.88rem; font-style:italic; }
 
-/* Plaquette de présentation des antennes — texte suivi, justifié.
-   La césure (hyphens) est indispensable ici : sans elle, le texte justifié
-   creuse de larges blancs entre les mots. Elle s'appuie sur l'attribut lang
-   posé sur le conteneur. */
-.plaquette { max-width:760px; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
-.plaquette p { font-size:1.05rem; line-height:1.8; margin:0 0 1.3em; color:#243b34; }
-.plaquette p:first-of-type { font-size:1.16rem; line-height:1.75; color:var(--ink); }
-.plaquette p:last-child { margin-bottom:0; }
-/* Sur mobile, une colonne étroite justifiée devient illisible : on repasse au fer à gauche. */
-@media (max-width:600px) { .plaquette { text-align:left; hyphens:none; } .plaquette p { font-size:1rem; line-height:1.7; } }
-
 /* Antennes — missions */
 .antenna-missions { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; align-items:start; }
 .mission-card p { margin-bottom:14px; }
@@ -135,7 +111,6 @@ h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0 0 16px; }
 .admin-card label { display:flex; flex-direction:column; gap:6px; font-size:.9rem; font-weight:600; color:var(--ink); }
 .admin-card input, .admin-card textarea { font:inherit; padding:10px 12px; border:1px solid #cdd9d3; border-radius:6px; }
 .admin-error { color:#b3261e; font-size:.88rem; margin:0; }
-.admin-error-banner { background:#fdecea; border:1px solid #f3c4bf; padding:12px 16px; border-radius:8px; margin:0 0 16px; font-weight:600; }
 .admin-topbar { display:flex; justify-content:space-between; align-items:center; background:white; padding:16px 24px; border-radius:10px; margin-bottom:20px; box-shadow:0 8px 28px #1b342111; }
 .admin-actions { display:flex; gap:10px; flex-wrap:wrap; margin:16px 0; }
 .admin-scopes { border:1px solid #cdd9d3; border-radius:6px; padding:12px 16px; display:flex; flex-direction:column; gap:8px; }

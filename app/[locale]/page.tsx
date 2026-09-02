@@ -25,16 +25,7 @@ export async function generateMetadata(
       canonical: `https://ecos-sahel.org/${locale}`,
       languages: { fr: "https://ecos-sahel.org/fr", en: "https://ecos-sahel.org/en" },
     },
-    // Next.js remplace l'objet openGraph du layout au lieu de le fusionner :
-    // il faut redonner l'image ici, sinon l'aperçu de l'accueil serait sans visuel.
-    openGraph: {
-      title,
-      description: copy.heroText,
-      locale: locale === "fr" ? "fr_FR" : "en_US",
-      type: "website",
-      siteName: "ECOS Sahel",
-      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "ECOS Sahel" }],
-    },
+    openGraph: { title, description: copy.heroText, locale: locale === "fr" ? "fr_FR" : "en_US" },
   };
 }
 
