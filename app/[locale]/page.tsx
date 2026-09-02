@@ -6,6 +6,9 @@ import { supabase } from "../../lib/supabase";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import ContactForm from "../components/ContactForm";
+import CopyButton from "../components/CopyButton";
+
+const providerEmoji: Record<string, string> = { Wave: "🌊", "Moov Money": "🔵", "Orange Money": "🟠" };
 
 type Post = { id: string; slug: string; title_fr: string; title_en: string | null; excerpt_fr: string | null; excerpt_en: string | null; scopes: ("portal" | "mali" | "burkina")[]; cover_image_path: string | null };
 
@@ -88,35 +91,63 @@ export default async function Home({ params }: { params: Promise<{ locale: "fr" 
             : <div className="card resource-item" key={title}>{inner}</div>;
         })}</div>
       </div></section>
-      <section id="don" className="section white"><div className="shell">
-        <h2>{locale === "fr" ? "Faire un don" : "Make a donation"}</h2>
+      <section id="don" className="section white donation-section"><div className="shell">
+        <h2>💚 {locale === "fr" ? "Faire un don" : "Make a donation"}</h2>
         <p className="section-lead">{locale === "fr" ? "Chaque don, quel que soit son montant, finance directement une action de terrain, jamais des frais de structure." : "Every donation, whatever the amount, funds a field action directly, never overhead costs."}</p>
         <div className="grid donation-grid">
           <article className="card donation-card">
+            <div className="donation-flag">🇲🇱</div>
             <h3>ECOS Mali</h3>
-            <p className="donation-label">{locale === "fr" ? "Mobile money" : "Mobile money"}</p>
-            <p className="donation-value">{donation.mali.mobileMoney}</p>
-            <p className="donation-providers">{donation.mali.providers.join(" · ")}</p>
+            <p className="donation-label">📱 {locale === "fr" ? "Mobile money" : "Mobile money"}</p>
+            <a className="donation-value" href={`tel:${donation.mali.mobileMoney.replace(/\s/g, "")}`}>{donation.mali.mobileMoney}</a>
+            <div className="provider-badges">
+              {donation.mali.providers.map((prov) => <span key={prov} className={`provider-badge provider-${prov.toLowerCase().replace(/\s/g, "-")}`}>{providerEmoji[prov]} {prov}</span>)}
+            </div>
+            <CopyButton value={donation.mali.mobileMoney} label={locale === "fr" ? "Copier le numéro" : "Copy number"} copiedLabel={locale === "fr" ? "✓ Copié" : "✓ Copied"} />
           </article>
+
           <article className="card donation-card">
+            <div className="donation-flag">🇧🇫</div>
             <h3>ECOS Burkina Faso</h3>
-            <p className="donation-label">{locale === "fr" ? "Mobile money" : "Mobile money"}</p>
-            <p className="donation-value">{donation.burkina.mobileMoney}</p>
-            <p className="donation-providers">{donation.burkina.providers.join(" · ")}</p>
+            <p className="donation-label">📱 {locale === "fr" ? "Mobile money" : "Mobile money"}</p>
+            <a className="donation-value" href={`tel:${donation.burkina.mobileMoney.replace(/\s/g, "")}`}>{donation.burkina.mobileMoney}</a>
+            <div className="provider-badges">
+              {donation.burkina.providers.map((prov) => <span key={prov} className={`provider-badge provider-${prov.toLowerCase().replace(/\s/g, "-")}`}>{providerEmoji[prov]} {prov}</span>)}
+            </div>
+            <CopyButton value={donation.burkina.mobileMoney} label={locale === "fr" ? "Copier le numéro" : "Copy number"} copiedLabel={locale === "fr" ? "✓ Copié" : "✓ Copied"} />
           </article>
-          <article className="card donation-card donation-bank">
-            <h3>{locale === "fr" ? "Virement bancaire (ECOS Mali)" : "Bank transfer (ECOS Mali)"}</h3>
-            <p className="donation-label">{donation.mali.bank.name}, {donation.mali.bank.agency}</p>
-            <table className="donation-rib">
-              <tbody>
-                <tr><td>{locale === "fr" ? "Code banque" : "Bank code"}</td><td>{donation.mali.bank.codeBanque}</td></tr>
-                <tr><td>{locale === "fr" ? "Code guichet" : "Branch code"}</td><td>{donation.mali.bank.codeGuichet}</td></tr>
-                <tr><td>{locale === "fr" ? "N° de compte" : "Account number"}</td><td>{donation.mali.bank.numeroCompte}</td></tr>
-                <tr><td>{locale === "fr" ? "Clé RIB" : "RIB key"}</td><td>{donation.mali.bank.cleRib}</td></tr>
-                <tr><td>BIC</td><td>{donation.mali.bank.bic}</td></tr>
-              </tbody>
-            </table>
-            <p className="donation-address">{donation.mali.bank.address_fr}</p>
+
+          <article className="donation-bank-wrap">
+            <div className="bank-visual-card">
+              <div className="bank-visual-top">
+                <span>🏦 {donation.mali.bank.name}</span>
+                <span className="bank-visual-country">🇲🇱 Mali</span>
+              </div>
+              <div className="bank-visual-number">{donation.mali.bank.numeroCompte}</div>
+              <div className="bank-visual-bottom">
+                <div><span className="bank-visual-tag">{locale === "fr" ? "Titulaire" : "Holder"}</span>{donation.mali.bank.holder}</div>
+                <div><span className="bank-visual-tag">BIC</span>{donation.mali.bank.bic}</div>
+              </div>
+            </div>
+            <div className="card donation-card donation-bank">
+              <h3>💳 {locale === "fr" ? "Virement bancaire (ECOS Mali)" : "Bank transfer (ECOS Mali)"}</h3>
+              <p className="donation-label">{donation.mali.bank.agency}</p>
+              <table className="donation-rib">
+                <tbody>
+                  <tr><td>{locale === "fr" ? "Code banque" : "Bank code"}</td><td>{donation.mali.bank.codeBanque}</td></tr>
+                  <tr><td>{locale === "fr" ? "Code guichet" : "Branch code"}</td><td>{donation.mali.bank.codeGuichet}</td></tr>
+                  <tr><td>{locale === "fr" ? "N° de compte" : "Account number"}</td><td>{donation.mali.bank.numeroCompte}</td></tr>
+                  <tr><td>{locale === "fr" ? "Clé RIB" : "RIB key"}</td><td>{donation.mali.bank.cleRib}</td></tr>
+                  <tr><td>BIC</td><td>{donation.mali.bank.bic}</td></tr>
+                </tbody>
+              </table>
+              <p className="donation-address">📍 {donation.mali.bank.address_fr}</p>
+              <CopyButton
+                value={`${donation.mali.bank.name} - ${donation.mali.bank.agency}\nCode banque: ${donation.mali.bank.codeBanque}\nCode guichet: ${donation.mali.bank.codeGuichet}\nN° de compte: ${donation.mali.bank.numeroCompte}\nClé RIB: ${donation.mali.bank.cleRib}\nBIC: ${donation.mali.bank.bic}`}
+                label={locale === "fr" ? "Copier le RIB complet" : "Copy full bank details"}
+                copiedLabel={locale === "fr" ? "✓ Copié" : "✓ Copied"}
+              />
+            </div>
           </article>
         </div>
       </div></section>
