@@ -112,13 +112,13 @@ export const resources: {
     title_fr: "Plaquette de présentation", title_en: "Presentation brochure",
     desc_fr: "Qui nous sommes et ce que nous faisons, en quelques pages faciles à partager.",
     desc_en: "Who we are and what we do, in a few pages easy to share.",
-    file: null,
+    file: "/documents/plaquette-ecos-sahel.pdf",
   },
   {
     title_fr: "Dossier de partenariat", title_en: "Partnership pack",
     desc_fr: "Comment nous soutenir concrètement : besoins, budgets et contacts des deux antennes.",
     desc_en: "How to support us in practice: needs, budgets and contacts for both branches.",
-    file: null,
+    file: "/documents/dossier-partenariat.pdf",
   },
 ];
 
