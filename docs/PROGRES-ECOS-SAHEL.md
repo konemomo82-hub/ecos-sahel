@@ -40,8 +40,9 @@ Un seul portail (`ecos-sahel.org`) présentant les deux antennes, avec un systè
 15. ✅ **Section « Ressources »** sur l'accueil (4 documents ; ceux sans fichier s'affichent « Bientôt disponible » plutôt qu'en lien mort)
 16. ✅ Pages d'antenne enrichies : bloc « Nos actions sur le terrain » (3 missions) + galerie photo filtrée par antenne
 17. ✅ **Corrigé l'« Application error » après déploiement** : le cache ISR de Next.js survivait au build et servait l'ancien HTML, qui pointait vers des fichiers JS/CSS supprimés (404 → échec d'hydratation). `.next` est désormais effacé avant chaque build — voir [`DEPLOIEMENT-CACHE.md`](DEPLOIEMENT-CACHE.md)
-
-→ Les 8 liens du menu mènent désormais tous quelque part. Plus aucune ancre morte.
+18. ✅ **Skill rédactionnel ECOS Sahel** ajouté pour Claude Code : `.claude/skills/ecos-redaction/SKILL.md`
+19. ✅ **Guide ChatGPT** ajouté : `docs/ECOS-REDACTION-CHATGPT.md` (instructions prêtes à copier dans un GPT personnalisé)
+20. ✅ Le flux de publication existant permet d’enregistrer un article comme brouillon puis de le publier explicitement depuis l’espace admin. La validation humaine reste obligatoire.
 
 ## À faire — priorités pour la suite
 
