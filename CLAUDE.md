@@ -85,3 +85,10 @@ Toute modification de schéma doit être répercutée dans ces fichiers : ils so
 ## Encodage
 
 Le dépôt a déjà subi un bug de mojibake UTF-8 sur l'ensemble des textes. Tous les fichiers contiennent des accents français : écrire et enregistrer strictement en UTF-8, et vérifier visuellement les accents (`é`, `à`, `ï`) après toute édition en masse ou tout script de transformation.
+
+
+## Skill rédactionnel ECOS Sahel
+
+Le skill Claude Code dédié à la rédaction se trouve dans `.claude/skills/ecos-redaction/SKILL.md`. Claude Code peut l'utiliser pour rédiger et réviser les contenus éditoriaux bilingues français/anglais. Respecter ses règles de ton, de vérification factuelle, de confidentialité et de périmètre de publication.
+
+**Règle obligatoire : validation humaine avant publication.** Le skill ne publie pas et ne met pas en ligne automatiquement. Tout article préparé reste un brouillon jusqu'à validation explicite d'un responsable humain. Ne jamais appeler une action de publication, d'envoi ou de diffusion sans cette validation. Vérifier séparément les images, citations, données personnelles et scopes (`portal`, `mali`, `burkina`).
